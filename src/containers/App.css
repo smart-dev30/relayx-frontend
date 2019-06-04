@@ -1,0 +1,13 @@
+#root {
+  text-align: center;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;  /* remove scrollbar space */
+  height: 2px;
+  background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FFF;
+}
