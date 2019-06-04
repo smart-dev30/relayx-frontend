@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {withRouter, NavLink} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter, NavLink } from 'react-router-dom';
 import {
   withStyles,
   AppBar,

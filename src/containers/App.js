@@ -8,6 +8,7 @@ import theme from '../services/theme';
 import store from '../store/configureStore'
 
 import Dashboard from './dashboard'
+import TopUps from './topup'
 
 import 'react-notifications/lib/notifications.css';
 
@@ -19,6 +20,7 @@ class App extends Component {
           <>
             <CssBaseline/>
             <Switch>
+              <Route path='/topups' component={TopUps} />
               <Route path='/dashboard' component={Dashboard} />
               <Redirect to='/dashboard' />
             </Switch>
