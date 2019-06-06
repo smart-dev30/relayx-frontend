@@ -19,5 +19,17 @@ export const styles = {
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-  }
+  },
+
+  formContent: { flex: 1, padding: '30px 50px', textAlign: 'left' },
+  formFooter: { marginBottom: 55, flexDirection: 'row', justifyContent: 'center' },
+
+  actionButton: {
+    margin: '0 10px',
+    width: 166,
+    height: 40,
+  },
+  nextButton: {
+    color: 'white'
+  },
 };

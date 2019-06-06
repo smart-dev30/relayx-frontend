@@ -8,7 +8,8 @@ import theme from '../services/theme';
 import store from '../store/configureStore'
 
 import Dashboard from './dashboard'
-import TopUps from './topup'
+import SetHandle from './TopUps/SetHandle'
+import SelectPayment from './TopUps/SelectPayment'
 
 import 'react-notifications/lib/notifications.css';
 
@@ -20,9 +21,10 @@ class App extends Component {
           <>
             <CssBaseline/>
             <Switch>
-              <Route path='/topups' component={TopUps} />
+              <Route path='/topups/handle' component={SetHandle} />
+              <Route path='/topups/select-payment' component={SelectPayment} />
               <Route path='/dashboard' component={Dashboard} />
-              <Redirect to='/dashboard' />
+              <Redirect to='/topups/handle' />
             </Switch>
           </>
         </MuiThemeProvider>

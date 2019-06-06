@@ -8,29 +8,26 @@ import { withStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
-import { StorageKeys, Promisify } from '../../utils';
+import { StorageKeys, Promisify } from '../../../utils';
 
 import {
   Typography,
-  IconButton,
   FormControl,
   Input,
   Button,
 } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
-import { Loader } from '../../components/Loader'
 
-import { userActionCreators, financeActionCreators } from '../../actions';
+import { Header, Loader } from '../../../components'
 
-import logo from '../../images/logo.png';
+import { userActionCreators, financeActionCreators } from '../../../actions';
 
 import { styles } from './style' ;
 
-class Dashboard extends Component {
+class SetHandle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      handle: '',
+      handle: 'maxim',
       isLoading: false,
     };
   }
@@ -45,11 +42,14 @@ class Dashboard extends Component {
     try {
       this.setState({ isLoading: true });
       await Promisify(receiveAddressRequest, handle);
-      await Promisify(getPayOptionsRequest);
+      await Promisify(getPayOptionsRequest, null);
+      this.setState({ isLoading: false }, () => {
+        this.props.history.push('/topups/select-payment')
+      });
     } catch (e) {
       console.error(e);
+      this.setState({ isLoading: false });
     }
-    this.setState({ isLoading: false });
   }
 
   render() {
@@ -58,15 +58,7 @@ class Dashboard extends Component {
 
     return <div className={classes.container}>
       <div className={classes.content}>
-        <div className={classes.header}>
-          <div className={classes.logoWrapper}>
-            <img src={logo} alt="RelayX logo" className={classes.headerLeftIcon} />
-          </div>
-          <Typography variant="h6" className={classes.title}>Top Up</Typography>
-          <IconButton aria-label="Delete" className={classes.margin}>
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        </div>
+        <Header title="Top Up"/>
 
         <div className={classes.formContent}>
           <Typography variant="body2">Relay Handle</Typography>
@@ -101,8 +93,9 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ main }) => ({
-  bsvAddress: main.bsvAddress
+const mapStateToProps = ({ main, finance }) => ({
+  bsvAddress: main.bsvAddress,
+  paymentOptions: finance.paymentOptions,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
@@ -113,4 +106,4 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   dispatch
 );
 
-export default withStyles(styles)(withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard)));
+export default withStyles(styles)(withRouter(connect(mapStateToProps, mapDispatchToProps)(SetHandle)));

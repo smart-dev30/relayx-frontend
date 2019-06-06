@@ -1,13 +1,15 @@
 import { all, fork, call, put, take } from 'redux-saga/effects';
 import { REQUEST } from '../../utils';
 
+import noop from 'lodash/noop';
+
 import { Finance } from '../../services/api';
 import {
   PAYMENT_OPTIONS,
   financeActionCreators,
 } from '../../actions';
 
-function* asyncGetPayOptions({ resolve, reject }) {
+function* asyncGetPayOptions({ resolve = noop, reject = noop }) {
   try {
     const response = yield call(Finance.getPaymentOptions);
     console.log('GetPayOptions:', response.data)

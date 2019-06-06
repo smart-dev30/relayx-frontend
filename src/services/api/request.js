@@ -28,7 +28,7 @@ export async function request(_url, { method, body, store }) {
     url += `?${queryString.stringify(body)}`;
   }
 
-  console.log('Request url:', `${API_URL}${url}`);
+  console.log('Request ', method, `: ${API_URL}${url}`);
   const response = await fetch(`${API_URL}${url}`, options);
   const result = await response.json();
   const { data } = result;
