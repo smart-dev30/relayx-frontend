@@ -5,17 +5,18 @@ import { withStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
-import { userInit } from '../../actions';
+import { StorageKeys } from '../../utils/constants';
 
 import {
   Typography,
   IconButton,
   FormControl,
   Input,
-  InputLabel,
   Button,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+
+import { userInit } from '../../actions';
 
 import logo from '../../images/logo.png';
 
@@ -30,6 +31,10 @@ class Dashboard extends Component {
   }
 
   handleChangeHandle = e => this.setState({ handle: e.target.value })
+
+  handleNextPress = () => {
+    localStorage.setItem(StorageKeys.DeviceId, this.state.handle)
+  }
 
   render() {
     const { classes } = this.props;
@@ -69,6 +74,7 @@ class Dashboard extends Component {
             }}
             className={classNames(classes.actionButton, classes.nextButton)}
             disabled={!handle}
+            onClick={this.handleNextPress}
           >
             Next
           </Button>
@@ -78,8 +84,8 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  main: state.main,
+const mapStateToProps = ({ main }) => ({
+  main,
 });
 
 const mapDispatchToProps = dispatch => ({

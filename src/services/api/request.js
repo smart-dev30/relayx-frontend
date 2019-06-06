@@ -1,19 +1,24 @@
 import queryString from 'query-string';
 import { API_URL } from '../utils/config';
+import { StorageKeys } from '../utils/constants';
 
 export async function request(_url, { method, body, store }) {
   let url = _url;
   if (!url || !method) {
     throw new Error('Missing method param(s), url or method');
   }
+
+  const devId = localStorage.getItem(StorageKeys.DeviceId)
+  if (!devId) {
+    throw new Error('No DeviceId or handle name provided');
+  }
+
   const options = {
     method,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      // 'devId': localStorage.get(StorageKeys.DeviceId),
-      // For testing I use following one as my device Id.
-      'devId': 'TEST-FOR-MAX-WEB-FRONTEND',
+      devId,
     },
   };
 

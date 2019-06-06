@@ -4,4 +4,4 @@ export const config = {
   APP_VERSION: '0.1'
 };
 
-export const API_URL = 'https://www.relayx.io/v1/';
+export const API_URL = 'https://www.relayx.io/';
