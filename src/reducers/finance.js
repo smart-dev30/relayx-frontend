@@ -1,27 +1,20 @@
 import { SUCCESS } from '../utils';
 
 import { 
-  USER_INIT, 
-  RECEIVE_ADDRESS, 
+  PAYMENT_OPTIONS,
   LOGOUT,
 } from '../actions';
 
 const INITIAL_STATE = {
-  bsvAddress: null,
+  paymentOptions: []
 };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case RECEIVE_ADDRESS[SUCCESS]:
-      return { ...state, bsvAddress: action.payload}
-
-    case USER_INIT[SUCCESS]:
-      console.log(action);
-      debugger;
-      return { ...state };
+    case PAYMENT_OPTIONS[SUCCESS]:
+      return { ...state, paymentOptions: action.payload}
 
     case LOGOUT:
-      localStorage.clear();
       return INITIAL_STATE;
 
     default:

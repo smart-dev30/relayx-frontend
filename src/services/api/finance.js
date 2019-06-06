@@ -1,4 +1,4 @@
-import { get, post } from './request';
+import { get } from './request';
 
 export const Finance = {
   async getBalance(address) {
@@ -13,7 +13,7 @@ export const Finance = {
     return get(`v1/setting/support/currency/list/${symbolType}`)
   },
 
-  async updateCurrency(body) {
-    return post('v1/earn/order/complete', { body });
+  async getPaymentOptions() {
+    return get('v1/setting/payment');
   },
 };

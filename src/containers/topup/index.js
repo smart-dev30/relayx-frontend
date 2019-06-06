@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
+
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
-import { StorageKeys } from '../../utils/constants';
+import { StorageKeys, Promisify } from '../../utils';
 
 import {
   Typography,
@@ -15,8 +18,9 @@ import {
   Button,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import { Loader } from '../../components/Loader'
 
-import { userInit } from '../../actions';
+import { userActionCreators, financeActionCreators } from '../../actions';
 
 import logo from '../../images/logo.png';
 
@@ -24,21 +28,33 @@ import { styles } from './style' ;
 
 class Dashboard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       handle: '',
-    }
+      isLoading: false,
+    };
   }
 
-  handleChangeHandle = e => this.setState({ handle: e.target.value })
+  handleChangeHandle = e => this.setState({ handle: e.target.value });
 
-  handleNextPress = () => {
-    localStorage.setItem(StorageKeys.DeviceId, this.state.handle)
+  handleNextPress = async () => {
+    const { receiveAddressRequest, getPayOptionsRequest } = this.props;
+    const handle = `1${this.state.handle}`;
+
+    localStorage.setItem(StorageKeys.DeviceId, handle);
+    try {
+      this.setState({ isLoading: true });
+      await Promisify(receiveAddressRequest, handle);
+      await Promisify(getPayOptionsRequest);
+    } catch (e) {
+      console.error(e);
+    }
+    this.setState({ isLoading: false });
   }
 
   render() {
     const { classes } = this.props;
-    const { handle } = this.state;
+    const { handle, isLoading } = this.state;
 
     return <div className={classes.container}>
       <div className={classes.content}>
@@ -79,17 +95,22 @@ class Dashboard extends Component {
             Next
           </Button>
         </div>
+        <Loader visible={isLoading} />
       </div>
     </div>
   }
 }
 
 const mapStateToProps = ({ main }) => ({
-  main,
+  bsvAddress: main.bsvAddress
 });
 
-const mapDispatchToProps = dispatch => ({
-  userInit: params => dispatch(userInit.request(params)),
-});
+const mapDispatchToProps = dispatch => bindActionCreators(
+  {
+    receiveAddressRequest: userActionCreators.receiveAddressRequest,
+    getPayOptionsRequest: financeActionCreators.getPayOptionsRequest,
+  },
+  dispatch
+);
 
 export default withStyles(styles)(withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard)));

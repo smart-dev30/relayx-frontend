@@ -1,6 +1,6 @@
 import queryString from 'query-string';
-import { API_URL } from '../utils/config';
-import { StorageKeys } from '../utils/constants';
+import { API_URL } from '../../utils/config';
+import { StorageKeys } from '../../utils/constants';
 
 export async function request(_url, { method, body, store }) {
   let url = _url;

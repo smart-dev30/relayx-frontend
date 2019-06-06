@@ -1,7 +1,7 @@
 import { get, post } from './request';
 
 export const User = {
-  async receiveingAddress(handleName) {
+  async receiveAddress(handleName) {
     return get(`api/receivingAddress/${handleName}`);
   },
 

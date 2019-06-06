@@ -11,10 +11,7 @@ export const createRequestTypes = base => {
   }, {})
 }
 
-export const action = (type, payload = {}) => {
-  return { type, ...payload }
-}
-
 export const StorageKeys = {
   DeviceId: storageKey('DEVICE-ID'),
+  PaymentOptions: storageKey('PAYMENT-OPTIONS'),
 }
