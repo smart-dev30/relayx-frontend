@@ -1,4 +1,4 @@
-import { SUCCESS } from '../utils';
+import { SUCCESS, getFromStorage, StorageKeys } from '../utils';
 
 import { 
   USER_INIT, 
@@ -7,7 +7,7 @@ import {
 } from '../actions';
 
 const INITIAL_STATE = {
-  bsvAddress: null,
+  bsvAddress: getFromStorage(StorageKeys.HandleAddress),
 };
 
 export default function (state = INITIAL_STATE, action) {

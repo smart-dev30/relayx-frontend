@@ -42,13 +42,10 @@ class SelectPayment extends Component {
       payMode: paymentOption.paymentId,
       status: 0,
       tranType: 1,
-    })
+    });
   }
 
-  handleTopUpPress = order => () => {
-    this.setState({ selectedTopUp: order })
-    console.log(order)
-  }
+  handleTopUpPress = order => () => this.setState({ selectedTopUp: order });
 
   getOrderClass = order => {
     const { selectedTopUp } = this.state;
@@ -72,7 +69,11 @@ class SelectPayment extends Component {
 
   handleBackPress = () => this.props.history.push('/topups/select-payment');
 
-  handleNextPress = async () => {}
+  handleNextPress = async () => {
+    const { selectedTopUp } = this.state;
+    this.props.selectOrder(selectedTopUp);
+    this.props.history.push('/topups/pay-topup');
+  }
 
   renderOrders = () => {
     const { classes, orders } = this.props;
@@ -163,6 +164,7 @@ const mapStateToProps = ({ finance, order }) => ({
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getOrdersRequest: orderActionCreators.getOrdersRequest,
+    selectOrder: orderActionCreators.selectOrder,
   },
   dispatch
 );

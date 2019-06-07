@@ -3,7 +3,7 @@ import { StorageKeys } from '../../utils';
 
 export const User = {
   async receiveAddress(handleName) {
-    return get(`api/receivingAddress/${handleName}`, { store: StorageKeys.HandleName });
+    return get(`api/receivingAddress/${handleName}`, { store: StorageKeys.HandleAddress });
   },
 
   async userInit(body) {

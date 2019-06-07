@@ -6,9 +6,9 @@ export function saveToStorage(key, data) {
   }
 }
 
-export function getFromStorage(key) {
+export function getFromStorage(key, isJson = true) {
   try {
-    return JSON.parse(localStorage.getItem(key));
+    return isJson ? JSON.parse(localStorage.getItem(key)) : localStorage.getItem(key);
   } catch (error) {
     return null;
   }

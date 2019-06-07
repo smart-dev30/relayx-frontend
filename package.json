@@ -16,6 +16,7 @@
     "moment": "^2.24.0",
     "moment-range": "^4.0.1",
     "prop-types": "^15.6.2",
+    "qrcode.react": "^0.9.3",
     "query-string": "^6.2.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
