@@ -20,6 +20,7 @@ export const styles = createStyles(theme => ({
     overflow: 'auto',
     marginBottom: 10,
     borderRadius: 6,
+    cursor: 'pointer',
   },
   activeListItem: {
     backgroundColor: Colors.ClearBlue,

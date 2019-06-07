@@ -6,19 +6,21 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
+import get from 'lodash/get';
 import classNames from 'classnames';
 
 import {
   Typography,
   Button,
-  List,
   ListItem,
   ListItemIcon,
 } from '@material-ui/core';
 
+import { Promisify } from '../../../utils';
+
 import { Header } from '../../../components';
 
-import { userActionCreators, financeActionCreators } from '../../../actions';
+import { orderActionCreators } from '../../../actions/order';
 
 import { styles } from './style';
 
@@ -28,66 +30,99 @@ class SelectPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedPayment: null
+      selectedTopUp: null,
     }
   }
 
-  handleBackPress = () => this.props.history.push('/topups/handle');
+  async componentDidMount() {
+    const { getOrdersRequest, paymentOption } = this.props;
+    if (!paymentOption) return;
 
-  handleNextPress = async () => {
+    await Promisify(getOrdersRequest, {
+      payMode: paymentOption.paymentId,
+      status: 0,
+      tranType: 1,
+    })
   }
 
-  handleClickPaymentMethod = selectedPayment => () => {
-    if (selectedPayment.status === 0) return;
-    this.setState({ selectedPayment });
+  handleTopUpPress = order => () => {
+    this.setState({ selectedTopUp: order })
+    console.log(order)
   }
 
-  listItemClassName = item => {
+  getOrderClass = order => {
+    const { selectedTopUp } = this.state;
     const { classes } = this.props;
-    const { selectedPayment } = this.state;
-    if (selectedPayment && selectedPayment.paymentId === item.paymentId) {
-      return classes.activeListItem;
+    if (get(selectedTopUp, 'serialNumber') === order.serialNumber) {
+      return classNames(classes.orderItem, classes.activeOrderItem);
+    } else {
+      return classNames(classes.orderItem, classes.inactiveOrderItem);
     }
-    return classes.inactiveListItem;
   }
 
-  listItemTitleClassName = item => {
+  getOrderTextClass = order => {
+    const { selectedTopUp } = this.state;
     const { classes } = this.props;
-    const { selectedPayment } = this.state;
-    if (selectedPayment && selectedPayment.paymentId === item.paymentId) {
-      return classes.activePaymentName;
+    if (get(selectedTopUp, 'serialNumber') === order.serialNumber) {
+      return classNames(classes.orderText, classes.activeOrderText);
+    } else {
+      return classes.orderText;
     }
-    return classes.inactivePaymentName;
+  }
+
+  handleBackPress = () => this.props.history.push('/topups/select-payment');
+
+  handleNextPress = async () => {}
+
+  renderOrders = () => {
+    const { classes, orders } = this.props;
+    return <div className={classes.orderList}>
+      {
+        orders.map(order => (
+          <ListItem
+            key={`#topup-${order.serialNumber}`}
+            className={this.getOrderClass(order)}
+            onClick={this.handleTopUpPress(order)}
+          >
+            <Typography className={this.getOrderTextClass(order)}>
+              {`${order.walletSymbolSign}${order.walletSendAmount}`}
+            </Typography>
+          </ListItem>
+        ))
+      }
+    </div>
   }
 
   render() {
-    const { classes, paymentOptions } = this.props;
-    const { selectedPayment } = this.state;
+    const { classes, paymentOption } = this.props;
+    const { selectedTopUp } = this.state;
+    const paymentId = get(paymentOption, 'paymentId', 2) - 2;
 
     return <div className={classes.container}>
       <div className={classes.content}>
         <Header title="Top Up" />
 
         <div className={classes.formContent}>
-          <Typography variant="body2" className={classes.title}>Choose your Payment Method</Typography>
+          <ListItem className={classes.selectedPayOption}>
+            <ListItemIcon>
+              <img src={payImages[paymentId]} alt="RelayX logo" className={classes.listIcon} />
+            </ListItemIcon>
 
-          <List className={classNames(classes.list, classes.root)}>
-          {paymentOptions.map((item, index) => (
-            <ListItem 
-              key={`#payment-option-${item.paymentId}`} 
-              className={classNames(classes.litItem, this.listItemClassName(item))}
-              onClick={this.handleClickPaymentMethod(item)}
-              disabled={item.status === 0}
+            <Typography className={classes.selectedPayOptionTitle}>
+              {paymentOption.paymentName}
+            </Typography>
+
+            <Button
+              className={classes.buttonChangePayOption}
+              onClick={this.handleBackPress}
             >
-              <ListItemIcon>
-                <img src={payImages[index]} alt="RelayX logo" className={classes.listIcon} />
-              </ListItemIcon>
-              <Typography className={classNames(classes.paymentName, this.listItemTitleClassName(item))}>
-                {item.paymentName}
-              </Typography>
-            </ListItem>
-          ))} 
-          </List>
+              Change
+            </Button>
+          </ListItem>
+
+          <Typography variant="body2" className={classes.title}>Choose your Top Up amount</Typography>
+
+          {this.renderOrders()}
         </div>
 
         <div className={classes.formFooter}>
@@ -100,7 +135,7 @@ class SelectPayment extends Component {
             Back
           </Button>
 
-          <Button 
+          <Button
             variant="contained"
             color="primary"
             classes={{
@@ -109,7 +144,7 @@ class SelectPayment extends Component {
             className={
               classNames(classes.actionButton, classes.nextButton)
             }
-            disabled={!selectedPayment}
+            disabled={!selectedTopUp}
             onClick={this.handleNextPress}
           >
             Next
@@ -120,14 +155,14 @@ class SelectPayment extends Component {
   }
 }
 
-const mapStateToProps = ({ finance }) => ({
-  paymentOptions: finance.paymentOptions
+const mapStateToProps = ({ finance, order }) => ({
+  paymentOption: finance.paymentOption,
+  orders: order.orders,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
-    receiveAddressRequest: userActionCreators.receiveAddressRequest,
-    getPayOptionsRequest: financeActionCreators.getPayOptionsRequest,
+    getOrdersRequest: orderActionCreators.getOrdersRequest,
   },
   dispatch
 );

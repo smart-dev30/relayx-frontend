@@ -10,6 +10,7 @@ import store from '../store/configureStore'
 import Dashboard from './dashboard'
 import SetHandle from './TopUps/SetHandle'
 import SelectPayment from './TopUps/SelectPayment'
+import SelectTopUp from './TopUps/SelectTopUp'
 
 import 'react-notifications/lib/notifications.css';
 
@@ -23,6 +24,7 @@ class App extends Component {
             <Switch>
               <Route path='/topups/handle' component={SetHandle} />
               <Route path='/topups/select-payment' component={SelectPayment} />
+              <Route path='/topups/select-topup' component={SelectTopUp} />
               <Route path='/dashboard' component={Dashboard} />
               <Redirect to='/topups/handle' />
             </Switch>

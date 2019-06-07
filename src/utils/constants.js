@@ -13,7 +13,8 @@ export const createRequestTypes = base => {
 
 export const StorageKeys = {
   DeviceId: storageKey('DEVICE-ID'),
+  HandleName: storageKey('HANDLE-NAME'),
+
   PaymentOptions: storageKey('PAYMENT-OPTIONS'),
   SelectedPaymentOption: storageKey('SELECTED-PAYMENT-OPTIONS'),
-  HandleName: storageKey('HANDLE-NAME'),
 }

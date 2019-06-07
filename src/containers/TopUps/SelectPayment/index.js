@@ -53,9 +53,7 @@ class SelectPayment extends Component {
 
   handleBackPress = () => this.props.history.push('/topups/handle');
 
-  handleNextPress = async () => {
-
-  }
+  handleNextPress = async () => this.props.history.push('/topups/select-topup');
 
   handleClickPaymentMethod = selectedPayment => () => {
     if (selectedPayment.status === 0) return;

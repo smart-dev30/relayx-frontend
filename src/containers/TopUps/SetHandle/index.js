@@ -27,7 +27,7 @@ class SetHandle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      handle: 'maxim',
+      handle: '',
     };
   }
 

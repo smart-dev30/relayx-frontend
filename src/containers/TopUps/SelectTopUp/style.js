@@ -9,38 +9,56 @@ export const styles = createStyles(theme => ({
     ...common.formContent,
     maxHeight: '291px',
   },
-  title: {
-    paddingBottom: 15,
-  },
-  list: {
-    maxHeight: '210px',
-    overflow: 'auto',
-  },
-  litItem: {
-    overflow: 'auto',
-    marginBottom: 10,
-    borderRadius: 6,
-  },
-  activeListItem: {
-    backgroundColor: Colors.ClearBlue,
-  },
-  inactiveListItem: {
-    backgroundColor: Colors.PaleGrey,
-  },
+  title: { padding: '10px 0' },
   listIcon: {
     width: 20,
     height: 20,
     borderRadius: 10,
   },
-  paymentName: {
+  selectedPayOption: {
+    overflow: 'auto',
+    marginBottom: 10,
+    borderRadius: 6,
+    backgroundColor: Colors.PaleGrey,
+  },
+  selectedPayOptionTitle: {
     fontWeight: 'bold',
     fontSize: 13,
+    color: Colors.DarkGrey,
+    flex: 1,
   },
-  activePaymentName: {
+  buttonChangePayOption: {
+    padding: 0,
+    margin: 0,
+  },
+
+  orderList: {
+    padding: '10px 0',
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'row',
+    cursor: 'pointer',
+  },
+  orderItem: {
+    width: 100,
+    height: 100,
+    borderRadius: 4,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 23,
+  },
+  orderText: {
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  activeOrderItem: {
+    backgroundColor: Colors.ClearBlue,
+  },
+  inactiveOrderItem: {
+    backgroundColor: Colors.PaleGrey,
+  },
+  activeOrderText: {
     color: 'white',
   },
-  inactivePaymentName: {
-    color: Colors.DarkGrey,
-  }
-
 }));
