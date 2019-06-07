@@ -1,8 +1,9 @@
 import { get, post } from './request';
+import { StorageKeys } from '../../utils';
 
 export const User = {
   async receiveAddress(handleName) {
-    return get(`api/receivingAddress/${handleName}`);
+    return get(`api/receivingAddress/${handleName}`, { store: StorageKeys.HandleName });
   },
 
   async userInit(body) {

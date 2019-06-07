@@ -16,11 +16,9 @@ import {
   ListItemIcon,
 } from '@material-ui/core';
 
-import { Promisify } from '../../../utils';
+import { Header } from '../../../components';
 
-import { Header, Loader } from '../../../components';
-
-import { financeActionCreators } from '../../../actions';
+import { userActionCreators, financeActionCreators } from '../../../actions';
 
 import { styles } from './style';
 
@@ -30,42 +28,24 @@ class SelectPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false,
-    }
-  }
-
-  async componentDidMount() {
-    await this.getPaymentOptions();
-  }
-
-  getPaymentOptions = async () => {
-    const { getPayOptionsRequest } = this.props;
-
-    try {
-      this.setState({ isLoading: true });
-      await Promisify(getPayOptionsRequest, null);
-      this.setState({ isLoading: false });
-    } catch (e) {
-      console.error(e);
-      this.setState({ isLoading: false });
+      selectedPayment: null
     }
   }
 
   handleBackPress = () => this.props.history.push('/topups/handle');
 
   handleNextPress = async () => {
-
   }
 
   handleClickPaymentMethod = selectedPayment => () => {
     if (selectedPayment.status === 0) return;
-    const { setPayOption } = this.props;
-    setPayOption(selectedPayment)
+    this.setState({ selectedPayment });
   }
 
   listItemClassName = item => {
-    const { classes, paymentOption } = this.props;
-    if (paymentOption && paymentOption.paymentId === item.paymentId) {
+    const { classes } = this.props;
+    const { selectedPayment } = this.state;
+    if (selectedPayment && selectedPayment.paymentId === item.paymentId) {
       return classes.activeListItem;
     }
     return classes.inactiveListItem;
@@ -73,23 +53,23 @@ class SelectPayment extends Component {
 
   listItemTitleClassName = item => {
     const { classes } = this.props;
-    const { paymentOption } = this.props;
-    if (paymentOption && paymentOption.paymentId === item.paymentId) {
+    const { selectedPayment } = this.state;
+    if (selectedPayment && selectedPayment.paymentId === item.paymentId) {
       return classes.activePaymentName;
     }
     return classes.inactivePaymentName;
   }
 
   render() {
-    const { classes, paymentOptions, paymentOption } = this.props;
-    const { isLoading } = this.state;
+    const { classes, paymentOptions } = this.props;
+    const { selectedPayment } = this.state;
 
     return <div className={classes.container}>
       <div className={classes.content}>
         <Header title="Top Up" />
 
         <div className={classes.formContent}>
-          <Typography variant="body2" className={classes.title}>Select your Payment Method</Typography>
+          <Typography variant="body2" className={classes.title}>Choose your Payment Method</Typography>
 
           <List className={classNames(classes.list, classes.root)}>
           {paymentOptions.map((item, index) => (
@@ -129,27 +109,25 @@ class SelectPayment extends Component {
             className={
               classNames(classes.actionButton, classes.nextButton)
             }
-            disabled={!paymentOption}
+            disabled={!selectedPayment}
             onClick={this.handleNextPress}
           >
             Next
           </Button>
         </div>
-        <Loader visible={isLoading} />
       </div>
     </div>
   }
 }
 
 const mapStateToProps = ({ finance }) => ({
-  paymentOptions: finance.paymentOptions,
-  paymentOption: finance.paymentOption,
+  paymentOptions: finance.paymentOptions
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
+    receiveAddressRequest: userActionCreators.receiveAddressRequest,
     getPayOptionsRequest: financeActionCreators.getPayOptionsRequest,
-    setPayOption: financeActionCreators.setPayOption,
   },
   dispatch
 );

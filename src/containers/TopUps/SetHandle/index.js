@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
-import { StorageKeys, Promisify } from '../../../utils';
+import { StorageKeys, Promisify, saveToStorage } from '../../../utils';
 
 import {
   Typography,
@@ -17,7 +17,7 @@ import {
   Button,
 } from '@material-ui/core';
 
-import { Header, Loader } from '../../../components'
+import { Header } from '../../../components'
 
 import { userActionCreators, financeActionCreators } from '../../../actions';
 
@@ -28,7 +28,6 @@ class SetHandle extends Component {
     super(props);
     this.state = {
       handle: 'maxim',
-      isLoading: false,
     };
   }
 
@@ -38,7 +37,7 @@ class SetHandle extends Component {
     const { receiveAddressRequest, getPayOptionsRequest } = this.props;
     const handle = `1${this.state.handle}`;
 
-    localStorage.setItem(StorageKeys.DeviceId, handle);
+    saveToStorage(StorageKeys.DeviceId, handle);
     try {
       this.setState({ isLoading: true });
       await Promisify(receiveAddressRequest, handle);
@@ -54,7 +53,7 @@ class SetHandle extends Component {
 
   render() {
     const { classes } = this.props;
-    const { handle, isLoading } = this.state;
+    const { handle } = this.state;
 
     return <div className={classes.container}>
       <div className={classes.content}>
@@ -87,15 +86,13 @@ class SetHandle extends Component {
             Next
           </Button>
         </div>
-        <Loader visible={isLoading} />
       </div>
     </div>
   }
 }
 
-const mapStateToProps = ({ main, finance }) => ({
+const mapStateToProps = ({ main }) => ({
   bsvAddress: main.bsvAddress,
-  paymentOptions: finance.paymentOptions,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(

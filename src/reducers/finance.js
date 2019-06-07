@@ -1,20 +1,27 @@
-import { SUCCESS } from '../utils';
+import { SUCCESS, StorageKeys, getFromStorage, saveToStorage } from '../utils';
 
-import { 
+import { LOGOUT } from '../actions';
+
+import {
+  SET_PAYMENT_OPTION,
   PAYMENT_OPTIONS,
-  LOGOUT,
-} from '../actions';
+} from '../actions/finance';
 
 const INITIAL_STATE = {
-  paymentOptions: []
+  paymentOption: getFromStorage(StorageKeys.SelectedPaymentOption),
+  paymentOptions: getFromStorage(StorageKeys.PaymentOptions) || [],
 };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
-    case PAYMENT_OPTIONS[SUCCESS]:
-      return { ...state, paymentOptions: action.payload}
+    case SET_PAYMENT_OPTION:
+      saveToStorage(StorageKeys.SelectedPaymentOption, action.payload);
+      return { ...state, paymentOption: action.payload };
 
-    case LOGOUT:
+      case PAYMENT_OPTIONS[SUCCESS]:
+      return { ...state, paymentOptions: action.payload };
+
+      case LOGOUT:
       return INITIAL_STATE;
 
     default:

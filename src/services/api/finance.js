@@ -1,4 +1,5 @@
 import { get } from './request';
+import { StorageKeys } from '../../utils';
 
 export const Finance = {
   async getBalance(address) {
@@ -14,6 +15,6 @@ export const Finance = {
   },
 
   async getPaymentOptions() {
-    return get('v1/setting/payment');
+    return get('v1/setting/payment', { store: StorageKeys.PaymentOptions });
   },
 };
