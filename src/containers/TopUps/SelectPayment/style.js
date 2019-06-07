@@ -30,6 +30,7 @@ export const styles = createStyles(theme => ({
   listIcon: {
     width: 20,
     height: 20,
+    borderRadius: 10,
   },
   paymentName: {
     fontWeight: 'bold',

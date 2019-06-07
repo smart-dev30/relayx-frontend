@@ -16,13 +16,13 @@ import {
   ListItemIcon,
 } from '@material-ui/core';
 
-import { Header } from '../../../components'
+import { Header } from '../../../components';
 
 import { userActionCreators, financeActionCreators } from '../../../actions';
 
-import { styles } from './style' ;
+import { styles } from './style';
 
-import WechatImage from '../../../images/wechat.png'
+import { payImages } from '../../../images';
 
 class SelectPayment extends Component {
   constructor(props) {
@@ -69,14 +69,14 @@ class SelectPayment extends Component {
           <Typography variant="body2" className={classes.title}>Select your Payment Method</Typography>
 
           <List className={classNames(classes.list, classes.root)}>
-          {paymentOptions.map(item => (
+          {paymentOptions.map((item, index) => (
             <ListItem 
               key={`#payment-option-${item.paymentId}`} 
               className={classNames(classes.litItem, this.listItemClassName(item))}
               onClick={this.handleClickPaymentMethod(item)}
             >
               <ListItemIcon>
-                <img src={WechatImage} alt="RelayX logo" className={classes.listIcon} />
+                <img src={payImages[index]} alt="RelayX logo" className={classes.listIcon} />
               </ListItemIcon>
               <Typography className={classNames(classes.paymentName, this.listItemTitleClassName(item))}>
                 {item.paymentName}
