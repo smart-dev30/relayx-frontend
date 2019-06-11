@@ -1,11 +1,12 @@
 import { createStyles } from '@material-ui/core/styles';
 import { styles as common } from '../style';
 import { Colors } from '../../services/theme'
+import { footerImage } from '../../images'
 
 export const styles = createStyles(theme => ({
   ...common,
 
-  container: { display: 'flex', justifyContent: 'center', position: 'relative' },
+  container: { display: 'flex', alignItems: 'center', position: 'relative', flexDirection: 'column' },
   content: {
     [theme.breakpoints.up('sm')]: {
       width: '70%',
@@ -81,4 +82,83 @@ export const styles = createStyles(theme => ({
       textAlign: 'center'
     },
   },
+  payDescription: {
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: '20%',
+      paddingRight: '20%',
+    },
+  },
+
+  decorateImage1: {
+    zIndex: -10,
+    position: 'absolute',
+    left: '75%',
+    top: '10%',
+  },
+  decorateImage2: {
+    zIndex: -10,
+    position: 'absolute',
+    right: '50%',
+    top: '75%',
+    width: '85%',
+  },
+  decorateImage3: {
+    position: 'absolute',
+    left: -theme.spacing(4),
+    top: '25%',
+    width: '20%',
+  },
+  decorateImage4: {
+    position: 'absolute',
+    right: -theme.spacing(5),
+    top: '75%',
+    width: '24%',
+  },
+  backgroundImage1: {
+    zIndex: -10,
+    position: 'absolute',
+    left: '25%',
+    top: -theme.spacing(10),
+    width: '110%'
+  },
+  backgroundImage2: {
+    zIndex: -10,
+    position: 'absolute',
+    left: '-15%',
+    top: -theme.spacing(15),
+    width: '80%'
+  },
+  backgroundImage3: {
+    zIndex: -10,
+    position: 'absolute',
+    left: '45%',
+    top: -theme.spacing(15),
+    width: '70%',
+    transform: 'scaleX(-1)',
+  },
+
+  footer: {
+    marginTop: theme.spacing(10),
+    backgroundImage: `url(${footerImage})`,
+    minHeight: theme.spacing(25),
+    width: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'top center',
+  },
+  footerDescriptions: {
+    [theme.breakpoints.up('sm')]: {
+      textAlign: 'right'
+    },
+    [theme.breakpoints.down('xs')]: {
+      textAlign: 'center'
+    },
+  },
+  socialButton: {
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2),
+  },
+  footerDescription: {
+    color: 'white',
+    paddingTop: theme.spacing(2),
+  }
 }));

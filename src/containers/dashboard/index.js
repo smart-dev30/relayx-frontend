@@ -62,6 +62,7 @@ class Dashboard extends Component {
             <img src={logoBigImage} className={classes.logo} alt="logo" />
           </header>
           <Grid container className={classes.row} spacing={2}>
+            <img className={classes.backgroundImage1} src={headImage} alt="Background" />
             <Grid item md={8} sm={12}>
               <Typography className={classes.title}>
                 The new standard in<br /> open payments
@@ -91,12 +92,17 @@ class Dashboard extends Component {
             </Grid>
             <Grid item md={4} sm={12} className={classes.center}>
               <div className={classNames(classes.phones)}>
+                <img className={classes.decorateImage1} src={phoneGreenImage} alt="RelayX Main screen" />
+                <img className={classes.decorateImage2} src={phoneBlueImage} alt="RelayX Main screen" />
                 <img className={classes.phone} src={phoneImage} alt="RelayX Main screen" />
+                <img className={classes.decorateImage3} src={phoneRedImage} alt="RelayX Main screen" />
+                <img className={classes.decorateImage4} src={phonePurpleImage} alt="RelayX Main screen" />
               </div>
             </Grid>
           </Grid>
 
           <Grid container className={classes.row} spacing={2}>
+            <img className={classes.backgroundImage2} src={headImage} alt="Background" />
             <Grid item md={5} sm={12} className={classes.lowOrder}>
               <Typography className={classes.title}>
                 Instant payments
@@ -183,6 +189,7 @@ class Dashboard extends Component {
           </Grid>
 
           <Grid container className={classes.row} spacing={3}>
+            <img className={classes.backgroundImage3} src={headImage} alt="Background" />
             <Grid item xs={12} className={classes.center}>
               <Typography className={classes.title}>
                 Get the App
@@ -208,8 +215,16 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
         </div>
-        <footer>
-        </footer>
+        <Grid container className={classNames(classes.row, classes.footer)} spacing={3}>
+          <Grid item sm={4} xs={12} className={classNames(classes.center)}>
+            <a href="https://twitter.com/relayxio"><img className={classes.socialButton} src={twitterImage} alt="Twitter" /></a>
+            <a href="https://www.medium.com/@relayx"><img className={classes.socialButton} src={modernImage} alt="Modern" /></a>
+          </Grid>
+          <Grid item sm={6} xs={12} className={classes.footerDescriptions}>
+            <Typography variant="h6" className={classes.footerDescription}> &nbsp;support@relayx.io</Typography>
+            <Typography variant="caption" className={classes.footerDescription}> COPYRIGHT &copy; Relay Trade Limited 2019. ALL RIGHTS RESERVED. </Typography>
+          </Grid>
+        </Grid>
       </div>
     )
   }
