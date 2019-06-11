@@ -70,7 +70,7 @@ class SetHandle extends Component {
         </div>
 
         <div className={classes.formFooter}>
-          <Button variant="contained" color="secondary" className={classes.actionButton} autoFocus>
+          <Button variant="contained" color="secondary" className={classes.actionButton}>
             Cancel
           </Button>
           <Button 
@@ -81,6 +81,7 @@ class SetHandle extends Component {
             }}
             className={classNames(classes.actionButton, classes.nextButton)}
             disabled={!handle}
+            autoFocus
             onClick={this.handleNextPress}
           >
             Next

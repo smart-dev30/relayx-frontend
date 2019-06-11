@@ -1,6 +1,8 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 export const Colors = {
+  EbonyClay: '#1c242c',
+  ShuttleGray: '#5c6f82',
   DarkGrey: '#2a2a2e',
   Slate: '#4f5f6d',
   SkyBlue: '#6ba1ff',
@@ -32,7 +34,7 @@ export default createMuiTheme({
     background: {
       paper: '#EFEFEF',
       dark: '#282c34',
-      default: Colors.LightPeriwinkle,
+      default: 'white',
     },
   },
   typography: {

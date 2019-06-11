@@ -1,6 +1,6 @@
 #root {
   text-align: center;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 ::-webkit-scrollbar {
   width: 0;  /* remove scrollbar space */

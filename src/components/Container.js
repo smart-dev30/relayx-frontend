@@ -21,18 +21,19 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitIcon from '@material-ui/icons/PowerSettingsNew';
-import {logout} from '../actions';
-import {config, PermissionValues, Constants} from '../utils';
+import { logout } from '../actions';
+import { config, PermissionValues, Constants } from '../utils';
 import PeopleIcon from '@material-ui/icons/People';
 import CreditCard from '@material-ui/icons/CreditCard';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import {Auth} from '../services/api';
-import {getRoles} from '../actions';
-import {NotificationManager, NotificationContainer} from 'react-notifications';
+import { Auth } from '../services/api';
+import { getRoles } from '../actions';
+import { NotificationManager, NotificationContainer } from 'react-notifications';
 
 const styles = theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    overflow: 'hidden',
   },
   grow: {
     flexGrow: 1
@@ -78,7 +79,7 @@ class ContainerLayout extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const {history, error} = this.props;
+    const { history, error } = this.props;
     if (!Auth.isAuthenticated()) {
       history.push('/login');
     } else {
@@ -94,15 +95,15 @@ class ContainerLayout extends Component {
 
   updateDrawerItems = () => {
     if (!this.props.user || !this.props.user.roleDetail) return;
-    const {permissions} = this.props.user.roleDetail;
+    const { permissions } = this.props.user.roleDetail;
     let drawerItems = [{
-      icon: <DashboardIcon/>,
+      icon: <DashboardIcon />,
       text: 'Dashboard',
       to: '/dashboard',
     }];
     if (permissions.includes(PermissionValues.CrudUsers)) {
       drawerItems.push({
-        icon: <PeopleIcon/>,
+        icon: <PeopleIcon />,
         text: 'Users',
         to: '/users',
         onClick: () => {
@@ -112,7 +113,7 @@ class ContainerLayout extends Component {
     }
     if (permissions.includes(PermissionValues.CrudRecords)) {
       drawerItems.push({
-        icon: <CreditCard/>,
+        icon: <CreditCard />,
         text: 'Deposit',
         to: '/deposit',
         onClick: () => {
@@ -120,19 +121,19 @@ class ContainerLayout extends Component {
         }
       });
     }
-    this.setState({drawerItems});
+    this.setState({ drawerItems });
   };
 
   onDrawerToggle = () => {
-    this.setState(state => ({mobileOpen: !state.mobileOpen}));
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
   handleMenu = event => {
-    this.setState({anchorEl: event.currentTarget});
+    this.setState({ anchorEl: event.currentTarget });
   };
 
   handleClose = () => {
-    this.setState({anchorEl: null});
+    this.setState({ anchorEl: null });
   };
 
   onLogout = () => {
@@ -141,9 +142,9 @@ class ContainerLayout extends Component {
   };
 
   render() {
-    const {drawerItems} = this.state;
-    const {classes, children} = this.props;
-    const {anchorEl} = this.state;
+    const { drawerItems } = this.state;
+    const { classes, children } = this.props;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     const appBar = (
@@ -154,7 +155,7 @@ class ContainerLayout extends Component {
           onClick={this.onDrawerToggle}
           className={classes.menuButton}
         >
-          <MenuIcon/>
+          <MenuIcon />
         </IconButton>
         <Typography variant='h6' color='inherit' className={classes.grow}>
           {config.APP_NAME}
@@ -166,7 +167,7 @@ class ContainerLayout extends Component {
             onClick={this.handleMenu}
             color='inherit'
           >
-            <AccountCircle/>
+            <AccountCircle />
           </IconButton>
           <Menu
             id='menu-appbar'
@@ -184,9 +185,9 @@ class ContainerLayout extends Component {
           >
             <MenuItem onClick={this.onLogout}>
               <ListItemIcon>
-                <ExitIcon/>
+                <ExitIcon />
               </ListItemIcon>
-              <ListItemText inset primary='Logout'/>
+              <ListItemText inset primary='Logout' />
             </MenuItem>
           </Menu>
         </>
@@ -196,7 +197,7 @@ class ContainerLayout extends Component {
     const drawer = (
       <>
         <Hidden xsDown>
-          <div className={classes.toolbar}/>
+          <div className={classes.toolbar} />
         </Hidden>
 
         {drawerItems && <List>
@@ -210,7 +211,7 @@ class ContainerLayout extends Component {
               onClick={drawerItem.onClick}
             >
               <ListItemIcon>{drawerItem.icon}</ListItemIcon>
-              <ListItemText primary={drawerItem.text}/>
+              <ListItemText primary={drawerItem.text} />
             </ListItem>
           ))}
         </List>}
@@ -251,10 +252,10 @@ class ContainerLayout extends Component {
         </nav>
 
         <main className={classes.content}>
-          <div className={classes.toolbar}/>
+          <div className={classes.toolbar} />
           {children}
         </main>
-        <NotificationContainer/>
+        <NotificationContainer />
       </div>
     );
   }
