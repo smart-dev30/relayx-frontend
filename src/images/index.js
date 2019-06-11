@@ -1,5 +1,38 @@
 import logoImage from './logo.png';
 
+import anyPay1Image from './dashboard/anypay1.jpg';
+import anypay2Image from './dashboard/anypay2.jpg';
+import apkImage from './dashboard/apk.png';
+import appstoreImage from './dashboard/appstore.png';
+import appstoreBETAImage from './dashboard/appstoreBETA.png';
+import case1Image from './dashboard/case1.png';
+import case2Image from './dashboard/case2.png';
+import case3Image from './dashboard/case3.png';
+import circleImage from './dashboard/circle.png';
+import envelopeImage from './dashboard/envelope.png';
+import faviconImage from './dashboard/favicon.ico';
+import featuresImage from './dashboard/features.png';
+import footerImage from './dashboard/footer.png';
+import googleplayImage from './dashboard/googleplay.png';
+import grabImage from './dashboard/grab.png';
+import greenpetalImage from './dashboard/greenpetal.png';
+import groupImage from './dashboard/group-copy.png';
+import headImage from './dashboard/head.png';
+import linepayImage from './dashboard/linepay.png';
+import logoBigImage from './dashboard/logo.png';
+import modernImage from './dashboard/modern.png';
+import msgImage from './dashboard/msg.png';
+import phone_backImage from './dashboard/phone_back.png';
+import phoneImage from './dashboard/phone.png';
+import phoneBlueImage from './dashboard/phoneBlue.png';
+import phoneGreenImage from './dashboard/phoneGreen.png';
+import phonePurpleImage from './dashboard/phonePurple.png';
+import phoneRedImage from './dashboard/phoneRed.png';
+import scbImage from './dashboard/scb.png';
+import showcaseImage from './dashboard/showcase.png';
+import sponsorImage from './dashboard/sponsor.png';
+import twitterImage from './dashboard/twitter.png';
+
 import payImage2 from './paymodes/2.png';
 import payImage3 from './paymodes/3.png';
 import payImage4 from './paymodes/4.png';
@@ -44,5 +77,37 @@ const payImages = [
 
 export {
   logoImage,
+  logoBigImage,
   payImages,
+  anyPay1Image,
+  anypay2Image,
+  apkImage,
+  appstoreImage,
+  appstoreBETAImage,
+  case1Image,
+  case2Image,
+  case3Image,
+  circleImage,
+  envelopeImage,
+  faviconImage,
+  featuresImage,
+  footerImage,
+  googleplayImage,
+  grabImage,
+  greenpetalImage,
+  groupImage,
+  headImage,
+  linepayImage,
+  modernImage,
+  msgImage,
+  phone_backImage,
+  phoneImage,
+  phoneBlueImage,
+  phoneGreenImage,
+  phonePurpleImage,
+  phoneRedImage,
+  scbImage,
+  showcaseImage,
+  sponsorImage,
+  twitterImage,
 }
