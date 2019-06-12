@@ -19,12 +19,15 @@ import {
 
 import QRCode from 'qrcode.react'
 
-import { Promisify, getFromStorage, StorageKeys, TOPUP_TIME_LIMIT } from '../../../utils';
+import { Promisify, TOPUP_TIME_LIMIT } from '../../../utils';
 
-import { Header } from '../../../components';
+import { Header, Loader } from '../../../components';
 
-import { userActionCreators } from '../../../actions/user';
-import { orderActionCreators } from '../../../actions/order';
+import {
+  userActionCreators,
+  orderActionCreators,
+  rechargeActionCreators,
+} from '../../../actions';
 
 import { styles } from './style';
 
@@ -35,42 +38,76 @@ class PayTopUp extends Component {
     super(props);
     this.state = {
       remainSeconds: TOPUP_TIME_LIMIT,
+      isLoading: false,
     }
   }
 
   async componentDidMount() {
-    const { selectedOrder, bsvAddress, receiveAddressRequest, onBack } = this.props;
+    const { selectedOrder, getOrderDetailRequest, onCancel } = this.props;
     if (!selectedOrder) {
-      onBack()
+      onCancel()
       return
     }
-    if (!bsvAddress) {
-      await Promisify(receiveAddressRequest, getFromStorage(StorageKeys.DeviceId, false));
-    }
+
+    await Promisify(getOrderDetailRequest, {
+      serialNumber: selectedOrder.serialNumber,
+      type: 2,
+    })
+
     this.reduceRemainSeconds();
+  }
+
+  componentWillUnmount() {
+    if (this.countDownTimerId) {
+      clearTimeout(this.countDownTimerId)
+    }
   }
 
   reduceRemainSeconds = () => {
     const { remainSeconds } = this.state;
-    const { onBack } = this.props;
+    const { onCancel } = this.props;
     if (remainSeconds > 0) {
-      delay(() => {
+      this.countDownTimerId = delay(() => {
         this.setState({ remainSeconds: remainSeconds - 1 });
         this.reduceRemainSeconds();
       }, 1000, 'later');
     } else {
-      delay(onBack, 1000, 'later');
+      this.countDownTimerId = delay(onCancel, 1000, 'later');
     }
   }
 
-  handleNextPress = async () => { }
+  handleCancelPress = async () => {
+    const { setRechargeClose, selectedOrder, onCancel, } = this.props
+
+    try {
+      this.setState({ isLoading: true });
+      await Promisify(setRechargeClose, { orderNumber: selectedOrder.serialNumber })
+      this.setState({ isLoading: false }, onCancel);
+    } catch (e) {
+      this.setState({ isLoading: false });
+      console.log(e);
+    }
+  }
+
+  handleNextPress = async () => {
+    const { getRechargeSend, selectedOrder, onNext } = this.props;
+
+    try {
+      this.setState({ isLoading: true });
+      await Promisify(getRechargeSend, selectedOrder.serialNumber)
+      this.setState({ isLoading: false }, onNext);
+    } catch (e) {
+      console.log(e);
+      this.setState({ isLoading: false });
+    }
+  }
 
   renderQRCode = () => {
-    const { classes, bsvAddress } = this.props;
+    const { classes, selectedTopUp } = this.props;
     const { remainSeconds } = this.state;
-    return bsvAddress ? (
+    return selectedTopUp ? (
       <div className={classes.qrCodeWrapper}>
-        <QRCode value={bsvAddress} />
+        {selectedTopUp.jsonInfo && <QRCode value={selectedTopUp.jsonInfo} />}
         <Typography className={classes.timer}>
           00:{remainSeconds < 10 ? `0${remainSeconds}` : remainSeconds}s
         </Typography>
@@ -79,7 +116,8 @@ class PayTopUp extends Component {
   }
 
   render() {
-    const { classes, paymentOption, selectedOrder, onChangePayOption, onBack } = this.props;
+    const { isLoading } = this.state;
+    const { classes, paymentOption, selectedOrder, onChangePayOption } = this.props;
     const paymentId = get(paymentOption, 'paymentId', 2) - 2;
 
     return (
@@ -118,9 +156,9 @@ class PayTopUp extends Component {
             variant="contained"
             color="secondary"
             className={classes.actionButton}
-            onClick={onBack}
+            onClick={this.handleCancelPress}
           >
-            Back
+            Cancel
           </Button>
 
           <Button
@@ -137,20 +175,24 @@ class PayTopUp extends Component {
             Sent
           </Button>
         </div>
+        <Loader visible={isLoading} />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ order, main, finance }) => ({
-  bsvAddress: main.bsvAddress,
+const mapStateToProps = ({ order, finance }) => ({
   paymentOption: finance.paymentOption,
   selectedOrder: order.selectedOrder,
+  selectedTopUp: order.selectedTopUp,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(
   {
     receiveAddressRequest: userActionCreators.receiveAddressRequest,
+    getOrderDetailRequest: orderActionCreators.getOrderDetailRequest,
+    setRechargeClose: rechargeActionCreators.setRechargeClose,
+    getRechargeSend: rechargeActionCreators.getRechargeSend,
     selectOrder: orderActionCreators.selectOrder,
   },
   dispatch

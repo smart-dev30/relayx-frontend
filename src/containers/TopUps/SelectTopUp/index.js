@@ -18,9 +18,9 @@ import {
 
 import { Promisify } from '../../../utils';
 
-import { Header } from '../../../components';
+import { Header, Loader } from '../../../components';
 
-import { orderActionCreators } from '../../../actions/order';
+import { orderActionCreators, rechargeActionCreators } from '../../../actions';
 
 import { styles } from './style';
 
@@ -31,14 +31,19 @@ class SelectPayment extends Component {
     super(props);
     this.state = {
       selectedTopUp: null,
+      isLoading: false,
     }
   }
 
   async componentDidMount() {
+    await this.getTopUpOrders()
+  }
+
+  getTopUpOrders = async () => {
     const { getOrdersRequest, paymentOption } = this.props;
     if (!paymentOption) return;
 
-    await Promisify(getOrdersRequest, {
+    return Promisify(getOrdersRequest, {
       payMode: paymentOption.paymentId,
       status: 0,
       tranType: 1,
@@ -69,9 +74,20 @@ class SelectPayment extends Component {
 
   handleNextPress = async () => {
     const { selectedTopUp } = this.state;
-    const { onNext } = this.props;
-    this.props.selectOrder(selectedTopUp);
-    onNext();
+    const { onNext, getRechargeInfo, selectOrder } = this.props;
+
+    try {
+      this.setState({ isLoading: true });
+
+      selectOrder(selectedTopUp);
+      await Promisify(getRechargeInfo, selectedTopUp.serialNumber);
+      this.setState({ isLoading: false }, onNext);
+    } catch (e) {
+      console.log(e);
+      this.setState({ selectedTopUp: null });
+      await this.getTopUpOrders();
+      this.setState({ isLoading: false });
+    }
   }
 
   renderOrders = () => {
@@ -95,7 +111,7 @@ class SelectPayment extends Component {
 
   render() {
     const { classes, paymentOption, onBack } = this.props;
-    const { selectedTopUp } = this.state;
+    const { selectedTopUp, isLoading } = this.state;
     const paymentId = get(paymentOption, 'paymentId', 2) - 2;
 
     return (
@@ -150,6 +166,7 @@ class SelectPayment extends Component {
             Next
           </Button>
         </div>
+        <Loader visible={isLoading} />
       </div>
     )
   }
@@ -164,6 +181,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
   {
     getOrdersRequest: orderActionCreators.getOrdersRequest,
     selectOrder: orderActionCreators.selectOrder,
+    getRechargeInfo: rechargeActionCreators.getRechargeInfo,
   },
   dispatch
 );
