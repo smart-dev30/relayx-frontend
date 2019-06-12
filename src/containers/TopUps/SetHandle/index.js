@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import classNames from 'classnames';
 
-import { StorageKeys, Promisify, saveToStorage } from '../../../utils';
+import { StorageKeys, Promisify, saveToStorage, getFromStorage } from '../../../utils';
 
 import {
   Typography,
@@ -21,20 +21,21 @@ import { Header } from '../../../components'
 
 import { userActionCreators, financeActionCreators } from '../../../actions';
 
-import { styles } from './style' ;
+import { styles } from './style';
 
 class SetHandle extends Component {
   constructor(props) {
     super(props);
+    const handle = getFromStorage(StorageKeys.DeviceId, false)
     this.state = {
-      handle: '',
+      handle: handle ? handle.substring(1) : '',
     };
   }
 
   handleChangeHandle = e => this.setState({ handle: e.target.value });
 
   handleNextPress = async () => {
-    const { receiveAddressRequest, getPayOptionsRequest } = this.props;
+    const { receiveAddressRequest, getPayOptionsRequest, onNext } = this.props;
     const handle = `1${this.state.handle}`;
 
     saveToStorage(StorageKeys.DeviceId, handle);
@@ -42,9 +43,7 @@ class SetHandle extends Component {
       this.setState({ isLoading: true });
       await Promisify(receiveAddressRequest, handle);
       await Promisify(getPayOptionsRequest, null);
-      this.setState({ isLoading: false }, () => {
-        this.props.history.push('/topups/select-payment')
-      });
+      this.setState({ isLoading: false }, onNext);
     } catch (e) {
       console.error(e);
       this.setState({ isLoading: false });
@@ -55,16 +54,16 @@ class SetHandle extends Component {
     const { classes } = this.props;
     const { handle } = this.state;
 
-    return <div className={classes.container}>
+    return (
       <div className={classes.content}>
-        <Header title="Top Up"/>
+        <Header title="Top Up" />
 
         <div className={classes.formContent}>
           <Typography variant="body2">Relay Handle</Typography>
           <div className={classes.handleWrapper}>
             <Typography className={classes.handlePrefix}>1</Typography>
             <FormControl className={classNames(classes.formControl, classes.inputForm)}>
-              <Input id='handle' value={handle} onChange={this.handleChangeHandle} placeholder="handle" className={classes.inputHandle}/>
+              <Input id='handle' value={handle} onChange={this.handleChangeHandle} placeholder="handle" className={classes.inputHandle} />
             </FormControl>
           </div>
         </div>
@@ -73,7 +72,7 @@ class SetHandle extends Component {
           <Button variant="contained" color="secondary" className={classes.actionButton}>
             Cancel
           </Button>
-          <Button 
+          <Button
             variant="contained"
             color="primary"
             classes={{
@@ -88,7 +87,7 @@ class SetHandle extends Component {
           </Button>
         </div>
       </div>
-    </div>
+    )
   }
 }
 

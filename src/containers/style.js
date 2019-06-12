@@ -7,7 +7,6 @@ export const styles = {
   },
   content: {
     position: 'relative',
-    marginTop: '10%',
     width: 450,
     height: 450,
     borderRadius: 10,

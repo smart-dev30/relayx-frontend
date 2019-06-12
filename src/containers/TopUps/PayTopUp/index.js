@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -39,9 +39,9 @@ class PayTopUp extends Component {
   }
 
   async componentDidMount() {
-    const { selectedOrder, history, bsvAddress, receiveAddressRequest } = this.props;
+    const { selectedOrder, bsvAddress, receiveAddressRequest, onBack } = this.props;
     if (!selectedOrder) {
-      history.push('/topups/select-topup');
+      onBack()
       return
     }
     if (!bsvAddress) {
@@ -52,23 +52,18 @@ class PayTopUp extends Component {
 
   reduceRemainSeconds = () => {
     const { remainSeconds } = this.state;
+    const { onBack } = this.props;
     if (remainSeconds > 0) {
       delay(() => {
-        this.setState({ remainSeconds: remainSeconds -1 });
+        this.setState({ remainSeconds: remainSeconds - 1 });
         this.reduceRemainSeconds();
       }, 1000, 'later');
     } else {
-      delay(() => {
-        this.handleBackPress();
-      }, 1000, 'later');
+      delay(onBack, 1000, 'later');
     }
   }
 
-  handleBackPress = () => this.props.history.push('/topups/select-topup');
-
-  handleChangePayOption = () => this.props.history.push('/topups/select-payment');
-
-  handleNextPress = async () => {}
+  handleNextPress = async () => { }
 
   renderQRCode = () => {
     const { classes, bsvAddress } = this.props;
@@ -84,10 +79,10 @@ class PayTopUp extends Component {
   }
 
   render() {
-    const { classes, paymentOption, selectedOrder } = this.props;
+    const { classes, paymentOption, selectedOrder, onChangePayOption, onBack } = this.props;
     const paymentId = get(paymentOption, 'paymentId', 2) - 2;
 
-    return <div className={classes.container}>
+    return (
       <div className={classes.content}>
         <Header title="Top Up" />
 
@@ -109,7 +104,7 @@ class PayTopUp extends Component {
 
             <Button
               className={classes.buttonChangePayOption}
-              onClick={this.handleChangePayOption}
+              onClick={onChangePayOption}
             >
               Change
             </Button>
@@ -119,11 +114,11 @@ class PayTopUp extends Component {
         </div>
 
         <div className={classes.formFooter}>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             color="secondary"
             className={classes.actionButton}
-            onClick={this.handleBackPress}
+            onClick={onBack}
           >
             Back
           </Button>
@@ -143,7 +138,7 @@ class PayTopUp extends Component {
           </Button>
         </div>
       </div>
-    </div>
+    )
   }
 }
 

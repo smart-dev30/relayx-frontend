@@ -8,10 +8,6 @@ import theme from '../services/theme';
 import store from '../store/configureStore'
 
 import Dashboard from './dashboard'
-import SetHandle from './TopUps/SetHandle'
-import SelectPayment from './TopUps/SelectPayment'
-import SelectTopUp from './TopUps/SelectTopUp'
-import PayTopUp from './TopUps/PayTopUp'
 
 import 'react-notifications/lib/notifications.css';
 
@@ -23,10 +19,6 @@ class App extends Component {
           <>
             <CssBaseline />
             <Switch>
-              <Route path='/topups/handle' component={SetHandle} />
-              <Route path='/topups/select-payment' component={SelectPayment} />
-              <Route path='/topups/select-topup' component={SelectTopUp} />
-              <Route path='/topups/pay-topup' component={PayTopUp} />
               <Route path='/dashboard' component={Dashboard} />
               <Redirect to='/dashboard' />
             </Switch>

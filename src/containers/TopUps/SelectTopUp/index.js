@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -67,12 +67,11 @@ class SelectPayment extends Component {
     }
   }
 
-  handleBackPress = () => this.props.history.push('/topups/select-payment');
-
   handleNextPress = async () => {
     const { selectedTopUp } = this.state;
+    const { onNext } = this.props;
     this.props.selectOrder(selectedTopUp);
-    this.props.history.push('/topups/pay-topup');
+    onNext();
   }
 
   renderOrders = () => {
@@ -95,11 +94,11 @@ class SelectPayment extends Component {
   }
 
   render() {
-    const { classes, paymentOption } = this.props;
+    const { classes, paymentOption, onBack } = this.props;
     const { selectedTopUp } = this.state;
     const paymentId = get(paymentOption, 'paymentId', 2) - 2;
 
-    return <div className={classes.container}>
+    return (
       <div className={classes.content}>
         <Header title="Top Up" />
 
@@ -115,7 +114,7 @@ class SelectPayment extends Component {
 
             <Button
               className={classes.buttonChangePayOption}
-              onClick={this.handleBackPress}
+              onClick={onBack}
             >
               Change
             </Button>
@@ -127,11 +126,11 @@ class SelectPayment extends Component {
         </div>
 
         <div className={classes.formFooter}>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             color="secondary"
             className={classes.actionButton}
-            onClick={this.handleBackPress}
+            onClick={onBack}
           >
             Back
           </Button>
@@ -152,7 +151,7 @@ class SelectPayment extends Component {
           </Button>
         </div>
       </div>
-    </div>
+    )
   }
 }
 

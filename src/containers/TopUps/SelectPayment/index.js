@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -51,10 +51,6 @@ class SelectPayment extends Component {
     }
   }
 
-  handleBackPress = () => this.props.history.push('/topups/handle');
-
-  handleNextPress = async () => this.props.history.push('/topups/select-topup');
-
   handleClickPaymentMethod = selectedPayment => () => {
     if (selectedPayment.status === 0) return;
     const { setPayOption } = this.props;
@@ -79,10 +75,10 @@ class SelectPayment extends Component {
   }
 
   render() {
-    const { classes, paymentOptions, paymentOption } = this.props;
+    const { classes, paymentOptions, paymentOption, onNext, onBack } = this.props;
     const { isLoading } = this.state;
 
-    return <div className={classes.container}>
+    return (
       <div className={classes.content}>
         <Header title="Top Up" />
 
@@ -90,35 +86,35 @@ class SelectPayment extends Component {
           <Typography variant="body2" className={classes.title}>Select your Payment Method</Typography>
 
           <List className={classNames(classes.list, classes.root)}>
-          {paymentOptions.map((item, index) => (
-            <ListItem 
-              key={`#payment-option-${item.paymentId}`} 
-              className={classNames(classes.litItem, this.listItemClassName(item))}
-              onClick={this.handleClickPaymentMethod(item)}
-              disabled={item.status === 0}
-            >
-              <ListItemIcon>
-                <img src={payImages[index]} alt="RelayX logo" className={classes.listIcon} />
-              </ListItemIcon>
-              <Typography className={classNames(classes.paymentName, this.listItemTitleClassName(item))}>
-                {item.paymentName}
-              </Typography>
-            </ListItem>
-          ))} 
+            {paymentOptions.map((item, index) => (
+              <ListItem
+                key={`#payment-option-${item.paymentId}`}
+                className={classNames(classes.litItem, this.listItemClassName(item))}
+                onClick={this.handleClickPaymentMethod(item)}
+                disabled={item.status === 0}
+              >
+                <ListItemIcon>
+                  <img src={payImages[index]} alt="RelayX logo" className={classes.listIcon} />
+                </ListItemIcon>
+                <Typography className={classNames(classes.paymentName, this.listItemTitleClassName(item))}>
+                  {item.paymentName}
+                </Typography>
+              </ListItem>
+            ))}
           </List>
         </div>
 
         <div className={classes.formFooter}>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             color="secondary"
             className={classes.actionButton}
-            onClick={this.handleBackPress}
+            onClick={onBack}
           >
             Back
           </Button>
 
-          <Button 
+          <Button
             variant="contained"
             color="primary"
             classes={{
@@ -128,14 +124,14 @@ class SelectPayment extends Component {
               classNames(classes.actionButton, classes.nextButton)
             }
             disabled={!paymentOption}
-            onClick={this.handleNextPress}
+            onClick={onNext}
           >
             Next
           </Button>
         </div>
         <Loader visible={isLoading} />
       </div>
-    </div>
+    )
   }
 }
 

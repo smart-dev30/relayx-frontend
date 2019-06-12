@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-
-import { userActionCreators } from '../../actions';
 import {
   Typography,
   Grid,
 } from '@material-ui/core';
+
+import SetHandle from '../TopUps/SetHandle'
+import SelectPayment from '../TopUps/SelectPayment'
+import SelectTopUp from '../TopUps/SelectTopUp'
+import PayTopUp from '../TopUps/PayTopUp'
 
 import {
   anyPay1Image,
@@ -39,12 +40,43 @@ import {
 
 import { styles } from './style';
 
+const Step = {
+  SET_HANDLE: 0,
+  SELECT_PAYMENT: 1,
+  SELECT_TOPUP: 2,
+  TOPUP_PAY: 3,
+}
+
+const MAX_STEP = 3
+
 class Dashboard extends Component {
+  state = {
+    step: Step.SET_HANDLE,
+  }
   componentDidMount() {
     console.log(this.props.bsvAddress)
   }
 
+  handleBackPress = () => {
+    const { step } = this.state
+    if (step > 0) {
+      this.setState({ step: step - 1 })
+    }
+  }
+
+  handleNextPress = () => {
+    const { step } = this.state
+    if (step < MAX_STEP) {
+      this.setState({ step: step + 1 })
+    }
+  }
+
+  handleChangePayOption = () => {
+    this.setState({ step: 1 })
+  }
+
   render() {
+    const { step } = this.state;
     const { classes } = this.props;
     return (
       <div className={classes.container}>
@@ -78,7 +110,25 @@ class Dashboard extends Component {
           </Grid>
           <Grid item md={6} sm={12}>
             <div className={classes.topUpContainer}>
-
+              {step === Step.SET_HANDLE && (
+                <SetHandle onNext={this.handleNextPress} onBack={this.handleBackPress} />
+              )}
+              {step === Step.SELECT_PAYMENT && (
+                <SelectPayment onNext={this.handleNextPress} onBack={this.handleBackPress} />
+              )}
+              {step === Step.SELECT_TOPUP && (
+                <SelectTopUp
+                  onNext={this.handleNextPress}
+                  onBack={this.handleBackPress}
+                />
+              )}
+              {step === Step.TOPUP_PAY && (
+                <PayTopUp
+                  onNext={this.handleNextPress}
+                  onBack={this.handleBackPress}
+                  onChangePayOption={this.handleChangePayOption}
+                />
+              )}
             </div>
           </Grid>
         </Grid>
@@ -251,19 +301,4 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ main }) => ({
-  bsvAddress: main.bsvAddress
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators(
-  {
-    receiveAddressRequest: userActionCreators.receiveAddressRequest,
-  },
-  dispatch
-);
-
-// ({
-//   userInit: params => dispatch(userInit.request(params)),
-// });
-
-export default withStyles(styles)(withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard)));
+export default withStyles(styles)(withRouter(Dashboard));
