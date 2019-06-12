@@ -11,8 +11,6 @@ import {
 function* asyncUserInit({ payload, resolve, reject }) {
   try {
     const response = yield call(User.userInit, payload);
-    console.log('User init response:', response);
-    debugger;
     yield put(userActionCreators.userInfoSuccess(response.data.data))
     resolve(response.data.data);
   } catch (e) {
@@ -31,20 +29,20 @@ function* asyncReceiveAddress({ payload, resolve, reject }) {
 }
 
 function* watchUserInit() {
-  while (true) { 
+  while (true) {
     const action = yield take(USER_INIT[REQUEST]);
-    yield* asyncUserInit(action) 
+    yield* asyncUserInit(action)
   }
 }
 
 function* watchReceiveAddress() {
-  while (true) { 
+  while (true) {
     const action = yield take(RECEIVE_ADDRESS[REQUEST]);
-    yield* asyncReceiveAddress(action) 
+    yield* asyncReceiveAddress(action)
   }
 }
 
-export default function*() {
+export default function* () {
   yield all([
     fork(watchUserInit),
     fork(watchReceiveAddress),

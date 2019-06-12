@@ -12,7 +12,6 @@ import {
 function* asyncGetPayOptions({ resolve = noop, reject = noop }) {
   try {
     const response = yield call(Finance.getPaymentOptions);
-    console.log('GetPayOptions:', response.data)
     yield put(financeActionCreators.getPayOptionsSuccess(response.data))
     resolve(response.data);
   } catch (e) {
@@ -21,13 +20,13 @@ function* asyncGetPayOptions({ resolve = noop, reject = noop }) {
 }
 
 function* watchGetPayOptions() {
-  while (true) { 
+  while (true) {
     const action = yield take(PAYMENT_OPTIONS[REQUEST]);
-    yield* asyncGetPayOptions(action) 
+    yield* asyncGetPayOptions(action)
   }
 }
 
-export default function*() {
+export default function* () {
   yield all([
     fork(watchGetPayOptions),
   ]);
