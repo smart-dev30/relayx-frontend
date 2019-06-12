@@ -84,7 +84,6 @@ class ContainerLayout extends Component {
       history.push('/login');
     } else {
       if (error && prevProps.error !== error) {
-        console.log('ERROR:', error);
         NotificationManager.error(`${error.message ? error.message : 'Undefined Error! Please try again'}`, 'Error message', 5000);
       }
       if (prevProps.user !== this.props.user && this.props.user) {

@@ -10,5 +10,5 @@ export const styles = {
   },
   logoWrapper: { padding: 10 },
   headerLeftIcon: { width: 16, height: 16 },
-  headerTitle: { flex: 1, textAlign: 'center', color: Colors.LightGrey },
+  headerTitle: { flex: 1, textAlign: 'center', color: Colors.LightGrey, marginRight: 36 },
 };
