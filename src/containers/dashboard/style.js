@@ -90,7 +90,7 @@ export const styles = createStyles(theme => ({
     color: Colors.LightPeriwinkle
   },
   logos: { textAlign: 'left' },
-  logo: { maxWidth: '35%' },
+  logo: { maxWidth: '50%' },
 
   downloadLinks: {
     paddingTop: theme.spacing(3)
@@ -107,6 +107,7 @@ export const styles = createStyles(theme => ({
   },
   phone: {
     maxWidth: '100%',
+    maxHeight: 500,
   },
   instantPays: {
     paddingTop: theme.spacing(4),
@@ -147,21 +148,21 @@ export const styles = createStyles(theme => ({
     width: '24%',
   },
   backgroundImage1: {
-    zIndex: -10,
+    zIndex: -20,
     position: 'absolute',
     left: '25%',
     top: -theme.spacing(10),
     width: '110%'
   },
   backgroundImage2: {
-    zIndex: -10,
+    zIndex: -20,
     position: 'absolute',
     left: '-15%',
     top: -theme.spacing(15),
     width: '80%'
   },
   backgroundImage3: {
-    zIndex: -10,
+    zIndex: -20,
     position: 'absolute',
     left: '45%',
     top: -theme.spacing(15),

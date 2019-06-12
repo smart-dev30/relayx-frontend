@@ -49,17 +49,17 @@ class Dashboard extends Component {
     return (
       <div className={classes.container}>
         <Grid container className={classNames(classes.header, classes.centerContent)} spacing={2}>
-          <Grid item xs={8} className={classes.logos}>
+          <Grid item sm={8} xs={6} className={classes.logos}>
             <img src={logoBigImage} className={classes.logo} alt="logo" />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item sm={2} xs={3}>
             <a className={classes.textButton} href="https://play.google.com/store/apps/details?id=com.RelayX">
               <Typography className={classes.textButtonTitle}>
-                Contact Us
+                Contact
               </Typography>
             </a>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item sm={2} xs={3}>
             <a className={classes.textButton} href="https://play.google.com/store/apps/details?id=com.RelayX">
               <Typography className={classes.textButtonTitle}>
                 Download
@@ -86,7 +86,7 @@ class Dashboard extends Component {
         <div className={classes.content}>
           <Grid container className={classes.centerContent} spacing={2}>
             <img className={classes.backgroundImage1} src={headImage} alt="Background" />
-            <Grid item md={8} sm={12}>
+            <Grid item md={8} sm={12} className={classes.lowOrder}>
               <Typography className={classes.title}>
                 Instant payments
               </Typography>
@@ -124,7 +124,7 @@ class Dashboard extends Component {
 
           <Grid container className={classes.centerContent} spacing={2}>
             <img className={classes.backgroundImage2} src={headImage} alt="Background" />
-            <Grid item md={5} sm={12} className={classes.lowOrder}>
+            <Grid item md={5} sm={12}>
               <Typography className={classes.title}>
                 Instant payments
               </Typography>
