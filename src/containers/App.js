@@ -21,14 +21,14 @@ class App extends Component {
       <Provider store={store}>
         <MuiThemeProvider theme={theme}>
           <>
-            <CssBaseline/>
+            <CssBaseline />
             <Switch>
               <Route path='/topups/handle' component={SetHandle} />
               <Route path='/topups/select-payment' component={SelectPayment} />
               <Route path='/topups/select-topup' component={SelectTopUp} />
               <Route path='/topups/pay-topup' component={PayTopUp} />
               <Route path='/dashboard' component={Dashboard} />
-              <Redirect to='/topups/handle' />
+              <Redirect to='/dashboard' />
             </Switch>
           </>
         </MuiThemeProvider>

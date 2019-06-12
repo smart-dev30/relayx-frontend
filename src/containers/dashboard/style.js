@@ -18,6 +18,7 @@ export const styles = createStyles(theme => ({
   },
   row: { paddingTop: theme.spacing(5), paddingBottom: theme.spacing(5), position: 'relative' },
   lowOrder: { order: 2 },
+  centerContent: { alignItems: 'center', justifyContent: 'center' },
   center: { textAlign: 'center' },
   title: {
     [theme.breakpoints.down('sm')]: {
@@ -48,16 +49,47 @@ export const styles = createStyles(theme => ({
     fontWeight: 500,
     paddingTop: theme.spacing(4),
     textAlign: 'center',
+    maxWidth: 405,
+    margin: 'auto',
+  },
+  whiteText: { color: 'white' },
+  lightPeriwinkleText: { color: Colors.LightPeriwinkle },
+  topUpContainer: {
+    position: 'relative',
+    marginTop: '10%',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    width: 450,
+    height: 450,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    boxShadow: '0px 2px 6px 0px rgba(0,0,0,0.44);',
+    display: 'flex',
+    flexDirection: 'column',
   },
 
-  logoHeader: {
+  header: {
+    backgroundImage: 'linear-gradient(to right, #15253c , #3c567b)',
     [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(5)
+      paddingLeft: '15%',
+      paddingRight: '15%',
+      paddingTop: theme.spacing(5),
+      paddingBottom: theme.spacing(10),
     },
     [theme.breakpoints.down('xs')]: {
-      margin: theme.spacing(2)
+      paddingLeft: '4%',
+      paddingRight: '4%',
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(5),
     },
   },
+  textButton: {
+    textDecoration: 'none'
+  },
+  textButtonTitle: {
+    color: Colors.LightPeriwinkle
+  },
+  logos: { textAlign: 'left' },
   logo: { maxWidth: '35%' },
 
   downloadLinks: {

@@ -16,25 +16,17 @@ import {
   anypay2Image,
   apkImage,
   appstoreImage,
-  appstoreBETAImage,
   case1Image,
   case2Image,
   case3Image,
   circleImage,
-  envelopeImage,
-  faviconImage,
-  featuresImage,
-  footerImage,
   googleplayImage,
   grabImage,
-  greenpetalImage,
-  groupImage,
   headImage,
   linepayImage,
   logoBigImage,
   modernImage,
   msgImage,
-  phone_backImage,
   phoneImage,
   phoneBlueImage,
   phoneGreenImage,
@@ -42,7 +34,6 @@ import {
   phoneRedImage,
   scbImage,
   showcaseImage,
-  sponsorImage,
   twitterImage,
 } from '../../images'
 
@@ -57,20 +48,50 @@ class Dashboard extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.container}>
-        <div className={classes.content}>
-          <header className={classes.logoHeader}>
+        <Grid container className={classNames(classes.header, classes.centerContent)} spacing={2}>
+          <Grid item xs={8} className={classes.logos}>
             <img src={logoBigImage} className={classes.logo} alt="logo" />
-          </header>
-          <Grid container className={classes.row} spacing={2}>
+          </Grid>
+          <Grid item xs={2}>
+            <a className={classes.textButton} href="https://play.google.com/store/apps/details?id=com.RelayX">
+              <Typography className={classes.textButtonTitle}>
+                Contact Us
+              </Typography>
+            </a>
+          </Grid>
+          <Grid item xs={2}>
+            <a className={classes.textButton} href="https://play.google.com/store/apps/details?id=com.RelayX">
+              <Typography className={classes.textButtonTitle}>
+                Download
+              </Typography>
+            </a>
+          </Grid>
+          <Grid item md={6} sm={12} className={classes.centerContent}>
+            <Typography className={classNames(classes.title, classes.whiteText)}>
+              The new standard in<br /> open payments
+              </Typography>
+            <Typography className={classNames(classes.description, classes.lightPeriwinkleText)}>
+              RelayX Superwallet enables individuals and
+              businesses to send and receive money with anyone,
+              anywhere,across any platform.
+              </Typography>
+          </Grid>
+          <Grid item md={6} sm={12}>
+            <div className={classes.topUpContainer}>
+
+            </div>
+          </Grid>
+        </Grid>
+
+        <div className={classes.content}>
+          <Grid container className={classes.centerContent} spacing={2}>
             <img className={classes.backgroundImage1} src={headImage} alt="Background" />
             <Grid item md={8} sm={12}>
               <Typography className={classes.title}>
-                The new standard in<br /> open payments
+                Instant payments
               </Typography>
               <Typography className={classes.description}>
-                RelayX Superwallet enables individuals and<br />
-                businesses to send and receive money with anyone,<br />
-                anywhere,across any platform.
+                Send and receive payments over any platform, anywhere. You control your funds too.
               </Typography>
               <Grid container className={classes.downloadLinks} spacing={3}>
                 <Grid item sm={4} xs={12} className={classNames(classes.center)}>
@@ -101,7 +122,7 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
 
-          <Grid container className={classes.row} spacing={2}>
+          <Grid container className={classes.centerContent} spacing={2}>
             <img className={classes.backgroundImage2} src={headImage} alt="Background" />
             <Grid item md={5} sm={12} className={classes.lowOrder}>
               <Typography className={classes.title}>
@@ -125,7 +146,7 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
 
-          <Grid container className={classes.row} spacing={2}>
+          <Grid container className={classes.centerContent} spacing={2}>
             <Typography className={classes.title}>
               Relay One - Accept any payment
             </Typography>
@@ -142,7 +163,7 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
 
-          <Grid container className={classes.row} spacing={2}>
+          <Grid container className={classes.centerContent} spacing={2}>
             <Grid item md={6} sm={12}>
               <Typography className={classes.subTitle}>
                 Stay in control
@@ -156,7 +177,7 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
 
-          <Grid container className={classes.row} spacing={3}>
+          <Grid container className={classes.centerContent} spacing={3}>
             <Grid item xs={12} className={classes.center}>
               <Typography className={classes.title}>
                 Earn money
@@ -188,7 +209,7 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
 
-          <Grid container className={classes.row} spacing={3}>
+          <Grid container className={classes.centerContent} spacing={3}>
             <img className={classes.backgroundImage3} src={headImage} alt="Background" />
             <Grid item xs={12} className={classes.center}>
               <Typography className={classes.title}>
