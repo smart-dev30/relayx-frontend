@@ -19,4 +19,4 @@ export const StorageKeys = {
   SelectedPaymentOption: storageKey('SELECTED-PAYMENT-OPTIONS'),
 }
 
-export const TOPUP_TIME_LIMIT = 10; // seconds
+export const TOPUP_TIME_LIMIT = 60; // seconds
