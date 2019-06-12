@@ -111,9 +111,11 @@ export const styles = createStyles(theme => ({
   },
   instantPays: {
     paddingTop: theme.spacing(4),
-    [theme.breakpoints.down('sm')]: {
-      textAlign: 'center'
-    },
+    textAlign: 'center',
+  },
+  instantPay: {
+    height: 40,
+    margin: theme.spacing(1)
   },
   payDescription: {
     [theme.breakpoints.down('sm')]: {

@@ -11,6 +11,7 @@ import SetHandle from '../TopUps/SetHandle'
 import SelectPayment from '../TopUps/SelectPayment'
 import SelectTopUp from '../TopUps/SelectTopUp'
 import PayTopUp from '../TopUps/PayTopUp'
+import TopUpCompletion from '../TopUps/Completion'
 
 import {
   anyPay1Image,
@@ -45,16 +46,14 @@ const Step = {
   SELECT_PAYMENT: 1,
   SELECT_TOPUP: 2,
   TOPUP_PAY: 3,
+  TOPUP_COMPLETE: 4,
 }
 
-const MAX_STEP = 3
+const MAX_STEP = 4
 
 class Dashboard extends Component {
   state = {
     step: Step.SET_HANDLE,
-  }
-  componentDidMount() {
-    console.log(this.props.bsvAddress)
   }
 
   handleBackPress = () => {
@@ -71,9 +70,9 @@ class Dashboard extends Component {
     }
   }
 
-  handleChangePayOption = () => {
-    this.setState({ step: 1 })
-  }
+  handleChangePayOption = () => this.setState({ step: Step.SELECT_PAYMENT })
+
+  handleCancelPress = () => this.setState({ step: Step.SET_HANDLE })
 
   render() {
     const { step } = this.state;
@@ -81,10 +80,10 @@ class Dashboard extends Component {
     return (
       <div className={classes.container}>
         <Grid container className={classNames(classes.header, classes.centerContent)} spacing={2}>
-          <Grid item sm={8} xs={6} className={classes.logos}>
+          <Grid item sm={12} xs={12} className={classes.logos}>
             <img src={logoBigImage} className={classes.logo} alt="logo" />
           </Grid>
-          <Grid item sm={2} xs={3}>
+          {/* <Grid item sm={2} xs={3}>
             <a className={classes.textButton} href="https://play.google.com/store/apps/details?id=com.RelayX">
               <Typography className={classes.textButtonTitle}>
                 Contact
@@ -97,7 +96,7 @@ class Dashboard extends Component {
                 Download
               </Typography>
             </a>
-          </Grid>
+          </Grid> */}
           <Grid item md={6} sm={12} className={classes.centerContent}>
             <Typography className={classNames(classes.title, classes.whiteText)}>
               The new standard in<br /> open payments
@@ -125,9 +124,12 @@ class Dashboard extends Component {
               {step === Step.TOPUP_PAY && (
                 <PayTopUp
                   onNext={this.handleNextPress}
-                  onBack={this.handleBackPress}
+                  onCancel={this.handleCancelPress}
                   onChangePayOption={this.handleChangePayOption}
                 />
+              )}
+              {step === Step.TOPUP_COMPLETE && (
+                <TopUpCompletion onNext={this.handleCancelPress} />
               )}
             </div>
           </Grid>
@@ -138,12 +140,12 @@ class Dashboard extends Component {
             <img className={classes.backgroundImage1} src={headImage} alt="Background" />
             <Grid item md={8} sm={12} className={classes.lowOrder}>
               <Typography className={classes.title}>
-                Instant payments
+                Top Up &amp; Withdraw
               </Typography>
               <Typography className={classes.description}>
-                Send and receive payments over any platform, anywhere. You control your funds too.
+                Load funds from any mobile wallet with our peer to peer settlement solution. Onboarding solved.
               </Typography>
-              <Grid container className={classes.downloadLinks} spacing={3}>
+              {/* <Grid container className={classes.downloadLinks} spacing={3}>
                 <Grid item sm={4} xs={12} className={classNames(classes.center)}>
                   <a href="https://play.google.com/store/apps/details?id=com.RelayX">
                     <img className={classes.downloadLink} src={googleplayImage} alt="Google play" />
@@ -159,7 +161,7 @@ class Dashboard extends Component {
                     <img className={classes.downloadLink} src={apkImage} alt="Raw Apk" />
                   </a>
                 </Grid>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Grid item md={4} sm={12} className={classes.center}>
               <div className={classNames(classes.phones)}>
@@ -182,11 +184,11 @@ class Dashboard extends Component {
                 Send and receive payments over any platform, anywhere. You control your funds too.
               </Typography>
               <div className={classes.instantPays} spacing={2}>
-                <img src={linepayImage} alt="Line Pay" />
-                <img src={grabImage} alt="Grab Pay" />
-                <img src={msgImage} alt="Wechat Pay" />
-                <img src={scbImage} alt="Scb Pay" />
-                <img src={circleImage} alt="Circle Pay" />
+                <img className={classes.instantPay} src={linepayImage} alt="Line Pay" />
+                <img className={classes.instantPay} src={grabImage} alt="Grab Pay" />
+                <img className={classes.instantPay} src={msgImage} alt="Wechat Pay" />
+                <img className={classes.instantPay} src={scbImage} alt="Scb Pay" />
+                <img className={classes.instantPay} src={circleImage} alt="Circle Pay" />
               </div>
             </Grid>
             <Grid item md={7} sm={12}>
