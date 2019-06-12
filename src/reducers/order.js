@@ -4,12 +4,14 @@ import { LOGOUT } from '../actions';
 
 import {
   GET_ORDERS,
+  GET_ORDER_DETAIL,
   SELECT_ORDER,
 } from '../actions/order';
 
 const INITIAL_STATE = {
   orders: [],
   selectedOrder: null,
+  selectedTopUp: null,
 };
 
 export default function (state = INITIAL_STATE, action) {
@@ -17,10 +19,13 @@ export default function (state = INITIAL_STATE, action) {
     case SELECT_ORDER:
       return { ...state, selectedOrder: action.payload };
 
-      case GET_ORDERS[SUCCESS]:
+    case GET_ORDERS[SUCCESS]:
       return { ...state, orders: action.payload.list || [] };
 
-      case LOGOUT:
+    case GET_ORDER_DETAIL[SUCCESS]:
+      return { ...state, selectedTopUp: action.payload };
+
+    case LOGOUT:
       return INITIAL_STATE;
 
     default:
