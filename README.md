@@ -1,11 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#RelayX web frontend
+[https://relayx.io](https://relayx.io)
 
-## Available Scripts
+## How to Setup
 
-In the project directory, you can run:
+**Step 1:** git clone this repo:
 
-### `npm start`
+**Step 2:** cd to the cloned repo:
 
+**Step 3:** Install the Application with `yarn install` or `npm i`
+
+**Step 3:** `npm start`
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
