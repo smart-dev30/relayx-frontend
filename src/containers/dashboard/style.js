@@ -15,6 +15,7 @@ export const styles = createStyles(theme => ({
       width: '92%',
     },
     textAlign: 'left',
+    marginTop : 45,
   },
   row: { paddingTop: theme.spacing(5), paddingBottom: theme.spacing(5), position: 'relative' },
   lowOrder: { order: 2 },
@@ -70,7 +71,6 @@ export const styles = createStyles(theme => ({
   },
 
   header: {
-    backgroundImage: 'linear-gradient(to right, #15253c , #3c567b)',
     [theme.breakpoints.up('sm')]: {
       paddingLeft: '15%',
       paddingRight: '15%',
@@ -149,6 +149,16 @@ export const styles = createStyles(theme => ({
     right: -theme.spacing(5),
     top: '75%',
     width: '24%',
+  },
+  backgroundImageToupContainer : {
+    zIndex: -9,
+    position: 'absolute',
+    top: 15,
+    right : 87
+  },
+  backgroundImage0: {
+    zIndex: -10,
+    position: 'absolute',
   },
   backgroundImage1: {
     zIndex: -20,
