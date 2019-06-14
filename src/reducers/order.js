@@ -1,4 +1,4 @@
-import { SUCCESS } from '../utils';
+import { SUCCESS, REQUEST } from '../utils';
 
 import { LOGOUT } from '../actions';
 
@@ -18,6 +18,9 @@ export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case SELECT_ORDER:
       return { ...state, selectedOrder: action.payload };
+
+    case GET_ORDERS[REQUEST]:
+      return { ...state, orders: [] };
 
     case GET_ORDERS[SUCCESS]:
       return { ...state, orders: action.payload.list || [] };

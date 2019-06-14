@@ -14,6 +14,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
+  Grid,
 } from '@material-ui/core';
 
 import { Promisify } from '../../../utils';
@@ -104,31 +105,35 @@ class SelectPayment extends Component {
           </List>
         </div>
 
-        <div className={classes.formFooter}>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.actionButton}
-            onClick={onBack}
-          >
-            Back
-          </Button>
+        <Grid container className={classes.formFooter}>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={classes.actionButton}
+              onClick={onBack}
+            >
+              Back
+            </Button>
+          </Grid>
 
-          <Button
-            variant="contained"
-            color="primary"
-            classes={{
-              label: classes.nextButton
-            }}
-            className={
-              classNames(classes.actionButton, classes.nextButton)
-            }
-            disabled={!paymentOption}
-            onClick={onNext}
-          >
-            Next
-          </Button>
-        </div>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              color="primary"
+              classes={{
+                label: classes.nextButton
+              }}
+              className={
+                classNames(classes.actionButton, classes.nextButton)
+              }
+              disabled={!paymentOption}
+              onClick={onNext}
+            >
+              Next
+            </Button>
+          </Grid>
+        </Grid>
         <Loader visible={isLoading} />
       </div>
     )

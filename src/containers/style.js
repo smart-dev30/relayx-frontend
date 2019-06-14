@@ -3,12 +3,14 @@ export const styles = {
     padding: 30,
     height: '100%',
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'center',
   },
   content: {
     position: 'relative',
-    width: 450,
-    height: 450,
+    minWidth: 350,
+    maxWidth: 450,
+    height: 430,
     borderRadius: 10,
     backgroundColor: 'white',
     boxShadow: '0px 2px 6px 0px rgba(0,0,0,0.44);',
@@ -20,12 +22,13 @@ export const styles = {
     alignItems: 'center',
   },
 
-  formContent: { flex: 1, padding: '30px 50px', textAlign: 'left' },
-  formFooter: { marginBottom: 55, flexDirection: 'row', justifyContent: 'center' },
+  formContent: { flex: 1, padding: '30px 40px', textAlign: 'left' },
+  formFooter: { paddingBottom: 35, flexDirection: 'row', justifyContent: 'center' },
 
   actionButton: {
     margin: '0 10px',
-    width: 166,
+    maxWidth: 136,
+    width: '100%',
     height: 40,
   },
   nextButton: {

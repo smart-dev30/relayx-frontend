@@ -5,15 +5,11 @@ import { Colors } from '../../../services/theme'
 export const styles = createStyles(theme => ({
   ...common,
 
-  formContent: {
-    ...common.formContent,
-    maxHeight: '291px',
-  },
   title: {
     paddingBottom: 15,
   },
   list: {
-    maxHeight: '210px',
+    maxHeight: 199,
     overflow: 'auto',
   },
   litItem: {

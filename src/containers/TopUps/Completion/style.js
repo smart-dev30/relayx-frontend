@@ -7,12 +7,15 @@ export const styles = createStyles(theme => ({
 
   formContent: {
     ...common.formContent,
-    maxHeight: '291px',
     textAlign: 'center',
     flexDirection: 'column',
     justifyContent: 'space-between',
     display: 'flex',
     padding: '40px 30px'
+  },
+  nextButton: {
+    ...common.nextButton,
+    minWidth: 200,
   },
   title: { padding: '10px 0' },
   amount: { color: Colors.ClearBlue, fontWeight: 'bold', padding: '20px 0' },

@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import {
   Typography,
   Button,
+  Grid,
 } from '@material-ui/core';
 
 import { Header } from '../../../components';
@@ -41,7 +42,7 @@ class TopUpCompletion extends Component {
           </Typography>
         </div>
 
-        <div className={classes.formFooter}>
+        <Grid container className={classes.formFooter}>
           <Button
             variant="contained"
             color="primary"
@@ -55,7 +56,7 @@ class TopUpCompletion extends Component {
           >
             Start Over
           </Button>
-        </div>
+        </Grid>
       </div>
     )
   }

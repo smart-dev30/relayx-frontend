@@ -5,10 +5,6 @@ import { Colors } from '../../../services/theme'
 export const styles = createStyles(theme => ({
   ...common,
 
-  formContent: {
-    ...common.formContent,
-    maxHeight: '291px',
-  },
   title: { padding: '10px 0' },
   listIcon: {
     width: 20,

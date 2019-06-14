@@ -15,6 +15,7 @@ import {
   FormControl,
   Input,
   Button,
+  Grid,
 } from '@material-ui/core';
 
 import { Header } from '../../../components'
@@ -60,32 +61,39 @@ class SetHandle extends Component {
 
         <div className={classes.formContent}>
           <Typography variant="body2">Relay Handle</Typography>
-          <div className={classes.handleWrapper}>
+          <Grid container className={classes.handleWrapper} spacing={1}>
             <Typography className={classes.handlePrefix}>1</Typography>
-            <FormControl className={classNames(classes.formControl, classes.inputForm)}>
-              <Input id='handle' value={handle} onChange={this.handleChangeHandle} placeholder="handle" className={classes.inputHandle} />
-            </FormControl>
-          </div>
+
+            <Grid item xs={10}>
+              <FormControl className={classNames(classes.formControl)}>
+                <Input id='handle' value={handle} onChange={this.handleChangeHandle} placeholder="handle" className={classes.inputHandle} />
+              </FormControl>
+            </Grid>
+          </Grid>
         </div>
 
-        <div className={classes.formFooter}>
-          <Button variant="contained" color="secondary" className={classes.actionButton}>
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            classes={{
-              label: classes.nextButton
-            }}
-            className={classNames(classes.actionButton, classes.nextButton)}
-            disabled={!handle}
-            autoFocus
-            onClick={this.handleNextPress}
-          >
-            Next
-          </Button>
-        </div>
+        <Grid container className={classes.formFooter}>
+          <Grid item xs={6}>
+            <Button variant="contained" color="secondary" className={classes.actionButton}>
+              Cancel
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              variant="contained"
+              color="primary"
+              classes={{
+                label: classes.nextButton
+              }}
+              className={classNames(classes.actionButton, classes.nextButton)}
+              disabled={!handle}
+              autoFocus
+              onClick={this.handleNextPress}
+            >
+              Next
+            </Button>
+          </Grid>
+        </Grid>
       </div>
     )
   }
