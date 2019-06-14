@@ -1,7 +1,7 @@
 import { createStyles } from '@material-ui/core/styles';
 import { styles as common } from '../style';
 import { Colors } from '../../services/theme'
-import { footerImage } from '../../images'
+import { footerImage , circleShadeBGImage } from '../../images'
 
 export const styles = createStyles(theme => ({
   ...common,
@@ -21,6 +21,8 @@ export const styles = createStyles(theme => ({
   lowOrder: { order: 2 },
   centerContent: { alignItems: 'center', justifyContent: 'center' },
   center: { textAlign: 'center' },
+  left : { textAlign : 'left' },
+  right : { textAlign : 'right' },
   title: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3),
@@ -150,11 +152,14 @@ export const styles = createStyles(theme => ({
     top: '75%',
     width: '24%',
   },
-  backgroundImageToupContainer : {
-    zIndex: -9,
+  backgroundImageTopContainer : {
+    top: -131,
+    left: -145,
+    width: 740,
+    height: 565,
+    zIndex: -10,
     position: 'absolute',
-    top: 15,
-    right : 87
+    backgroundImage : `url(${circleShadeBGImage})`,
   },
   backgroundImage0: {
     zIndex: -10,

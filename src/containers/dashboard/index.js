@@ -110,8 +110,9 @@ class Dashboard extends Component {
               </Typography>
           </Grid>
           <Grid item md={6} sm={12}>
-            <img className={classes.backgroundImageToupContainer} src={circleShadeBGImage} alt="Background" />
+            {/* <img className={classes.backgroundImageToupContainer} src={circleShadeBGImage} alt="Background" /> */}
             <div className={classes.topUpContainer}>
+              <div className={classes.backgroundImageTopContainer}></div>
               {step === Step.SET_HANDLE && (
                 <SetHandle onNext={this.handleNextPress} onBack={this.handleBackPress} />
               )}
@@ -202,6 +203,9 @@ class Dashboard extends Component {
           </Grid>
 
           <Grid container className={classes.centerContent} spacing={2}>
+            <Grid item md={6} sm={12}>
+              <img className={classes.phone} src={anyPay1Image} alt="Payment method" />
+            </Grid>
             <Typography className={classes.title}>
               Relay One - Accept any payment
             </Typography>
@@ -212,9 +216,6 @@ class Dashboard extends Component {
               <Typography className={classes.description}>
                 Whether crypto, Alipay, WeChat, or anything else, it’s the most interoperable and fastest solution.
               </Typography>
-            </Grid>
-            <Grid item md={6} sm={12}>
-              <img className={classes.phone} src={anyPay1Image} alt="Payment method" />
             </Grid>
           </Grid>
 
@@ -260,17 +261,17 @@ class Dashboard extends Component {
                 Start using money the way it was meant to be. Relay in seconds.
               </Typography>
             </Grid>
-            <Grid item sm={4} xs={12} className={classNames(classes.center)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.right)}>
               <a href="https://play.google.com/store/apps/details?id=com.RelayX">
                 <img className={classes.downloadLink} src={googleplayImage} alt="Google play" />
               </a>
             </Grid>
-            <Grid item sm={4} xs={12} className={classNames(classes.center)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.center)}>
               <a href="https://testflight.apple.com/join/XJCahkvx">
                 <img className={classes.downloadLink} src={appstoreImage} alt="Appstore" />
               </a>
             </Grid>
-            <Grid item sm={4} xs={12} className={classNames(classes.center)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.left)}>
               <a href="https://www.installonair.com/app-download-link/UlhWAn">
                 <img className={classes.downloadLink} src={apkImage} alt="Raw Apk" />
               </a>
