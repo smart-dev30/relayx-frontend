@@ -33,7 +33,7 @@ class SetHandle extends Component {
     };
   }
 
-  handleChangeHandle = e => this.setState({ handle: e.target.value });
+  handleChangeHandle = e => this.setState({ handle: e.target.value.toLowerCase() });
 
   handleNextPress = async () => {
     const { receiveAddressRequest, getPayOptionsRequest, onNext } = this.props;
