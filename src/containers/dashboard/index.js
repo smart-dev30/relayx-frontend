@@ -36,8 +36,7 @@ import {
   scbImage,
   showcaseImage,
   twitterImage,
-  headerImage,
-  circleShadeBGImage
+  headerImage
 } from '../../images'
 
 import { styles } from './style';
@@ -261,17 +260,19 @@ class Dashboard extends Component {
                 Start using money the way it was meant to be. Relay in seconds.
               </Typography>
             </Grid>
-            <Grid item sm={3} xs={12} className={classNames(classes.right)}>
+          </Grid>
+          <Grid container className={classes.centerContent} spacing={3}>
+            <Grid item sm={3} xs={12}  className={classNames(classes.center, classes.social)}>
               <a href="https://play.google.com/store/apps/details?id=com.RelayX">
                 <img className={classes.downloadLink} src={googleplayImage} alt="Google play" />
               </a>
             </Grid>
-            <Grid item sm={3} xs={12} className={classNames(classes.center)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.center, classes.social)}>
               <a href="https://testflight.apple.com/join/XJCahkvx">
                 <img className={classes.downloadLink} src={appstoreImage} alt="Appstore" />
               </a>
             </Grid>
-            <Grid item sm={3} xs={12} className={classNames(classes.left)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.center, classes.social)}>
               <a href="https://www.installonair.com/app-download-link/UlhWAn">
                 <img className={classes.downloadLink} src={apkImage} alt="Raw Apk" />
               </a>

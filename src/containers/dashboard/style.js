@@ -38,6 +38,11 @@ export const styles = createStyles(theme => ({
     lineHeight: 1.1,
     textAlign: 'center'
   },
+  social : {
+    [theme.breakpoints.up('md')]: {
+      maxWidth : '22%'
+    },
+  },
   subTitle: {
     paddingTop: theme.spacing(5),
     color: Colors.EbonyClay,
