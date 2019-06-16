@@ -166,17 +166,21 @@ export const styles = createStyles(theme => ({
     width: '24%',
   },
   backgroundImageTopContainer : {
-    top: -131,
-    left: -145,
+    top: 0,
+    left: 0,
     zIndex: -10,
     position: 'absolute',
+    maxWidth : '100%',
+    transform : 'scale(1.6)'
     // backgroundImage : `url(${circleShadeBGImage})`,
   },
   backgroundImage0: {
     zIndex: -10,
     position: 'absolute',
     width : '100%',
-    top : 0
+    top : 0,
+    bottom : 0 ,
+    height : '100%'
   },
   backgroundImage1: {
     zIndex: -20,
