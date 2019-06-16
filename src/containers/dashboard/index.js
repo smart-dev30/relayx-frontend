@@ -36,7 +36,8 @@ import {
   scbImage,
   showcaseImage,
   twitterImage,
-  headerImage
+  headerImage,
+  circleShadeBGImage
 } from '../../images'
 
 import { styles } from './style';
@@ -109,9 +110,9 @@ class Dashboard extends Component {
               </Typography>
           </Grid>
           <Grid item md={6} sm={12}>
-            {/* <img className={classes.backgroundImageToupContainer} src={circleShadeBGImage} alt="Background" /> */}
             <div className={classes.topUpContainer}>
-              <div className={classes.backgroundImageTopContainer}></div>
+              <img className={classes.backgroundImageTopContainer} src={circleShadeBGImage} alt="Background" />
+              {/* <div className={classes.backgroundImageTopContainer}></div> */}
               {step === Step.SET_HANDLE && (
                 <SetHandle onNext={this.handleNextPress} onBack={this.handleBackPress} />
               )}

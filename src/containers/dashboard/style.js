@@ -1,7 +1,7 @@
 import { createStyles } from '@material-ui/core/styles';
 import { styles as common } from '../style';
 import { Colors } from '../../services/theme'
-import { footerImage , circleShadeBGImage } from '../../images'
+import { footerImage , circleShadeBGImage , headerImage , headerMobileImage } from '../../images'
 
 export const styles = createStyles(theme => ({
   ...common,
@@ -15,7 +15,7 @@ export const styles = createStyles(theme => ({
       width: '92%',
     },
     textAlign: 'left',
-    marginTop : 45,
+    marginTop : theme.spacing(10),
   },
   row: { paddingTop: theme.spacing(5), paddingBottom: theme.spacing(5), position: 'relative' },
   lowOrder: { order: 2 },
@@ -41,6 +41,9 @@ export const styles = createStyles(theme => ({
   social : {
     [theme.breakpoints.up('md')]: {
       maxWidth : '22%'
+    },
+    [theme.breakpoints.up('xl')]: {
+      maxWidth : '16%'
     },
   },
   subTitle: {
@@ -81,15 +84,20 @@ export const styles = createStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: '15%',
       paddingRight: '15%',
-      paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(10),
+      //backgroundImage: `url(${headerImage})`,
     },
     [theme.breakpoints.down('xs')]: {
       paddingLeft: '4%',
       paddingRight: '4%',
-      paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(5),
+      //backgroundImage : `url(${headerMobileImage})`
     },
+    minHeight: theme.spacing(25),
+    width: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'top center',
+    position : 'relative'
   },
   textButton: {
     textDecoration: 'none'
@@ -98,7 +106,7 @@ export const styles = createStyles(theme => ({
     color: Colors.LightPeriwinkle
   },
   logos: { textAlign: 'left' },
-  logo: { maxWidth: '50%' },
+  logo: { maxWidth: '50%' , paddingTop : 45 },
 
   downloadLinks: {
     paddingTop: theme.spacing(3)
@@ -160,15 +168,15 @@ export const styles = createStyles(theme => ({
   backgroundImageTopContainer : {
     top: -131,
     left: -145,
-    width: 740,
-    height: 565,
     zIndex: -10,
     position: 'absolute',
-    backgroundImage : `url(${circleShadeBGImage})`,
+    // backgroundImage : `url(${circleShadeBGImage})`,
   },
   backgroundImage0: {
     zIndex: -10,
     position: 'absolute',
+    width : '100%',
+    top : 0
   },
   backgroundImage1: {
     zIndex: -20,
