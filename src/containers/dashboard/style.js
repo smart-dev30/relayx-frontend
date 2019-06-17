@@ -89,7 +89,7 @@ export const styles = createStyles(theme => ({
     [theme.breakpoints.down('xs')]: {
       paddingLeft: '4%',
       paddingRight: '4%',
-      paddingBottom: theme.spacing(7),
+      paddingBottom: theme.spacing(8),
     },
     minHeight: theme.spacing(25),
     width: '100%',
@@ -165,7 +165,7 @@ export const styles = createStyles(theme => ({
     width: '24%',
   },
   backgroundImageTopContainer : {
-    top: -23,
+    top: -25,
     left: 0,
     zIndex: -10,
     position: 'absolute',
