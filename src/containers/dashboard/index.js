@@ -112,7 +112,6 @@ class Dashboard extends Component {
           <Grid item md={6} sm={12}>
             <div className={classes.topUpContainer}>
               <img className={classes.backgroundImageTopContainer} src={circleShadeBGImage} alt="Background" />
-              {/* <div className={classes.backgroundImageTopContainer}></div> */}
               {step === Step.SET_HANDLE && (
                 <SetHandle onNext={this.handleNextPress} onBack={this.handleBackPress} />
               )}

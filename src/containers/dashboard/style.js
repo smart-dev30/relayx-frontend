@@ -1,7 +1,7 @@
 import { createStyles } from '@material-ui/core/styles';
 import { styles as common } from '../style';
 import { Colors } from '../../services/theme'
-import { footerImage , circleShadeBGImage , headerImage , headerMobileImage } from '../../images'
+import { footerImage } from '../../images'
 
 export const styles = createStyles(theme => ({
   ...common,
@@ -84,20 +84,19 @@ export const styles = createStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: '15%',
       paddingRight: '15%',
-      paddingBottom: theme.spacing(10),
-      //backgroundImage: `url(${headerImage})`,
+      paddingBottom: theme.spacing(12),
     },
     [theme.breakpoints.down('xs')]: {
       paddingLeft: '4%',
       paddingRight: '4%',
-      paddingBottom: theme.spacing(5),
-      //backgroundImage : `url(${headerMobileImage})`
+      paddingBottom: theme.spacing(7),
     },
     minHeight: theme.spacing(25),
     width: '100%',
     backgroundSize: 'cover',
     backgroundPosition: 'top center',
-    position : 'relative'
+    position : 'relative',
+    overflow : 'hidden'
   },
   textButton: {
     textDecoration: 'none'
@@ -166,13 +165,12 @@ export const styles = createStyles(theme => ({
     width: '24%',
   },
   backgroundImageTopContainer : {
-    top: 0,
+    top: -23,
     left: 0,
     zIndex: -10,
     position: 'absolute',
     maxWidth : '100%',
-    transform : 'scale(1.6)'
-    // backgroundImage : `url(${circleShadeBGImage})`,
+    transform : 'scale(1.4)'
   },
   backgroundImage0: {
     zIndex: -10,
