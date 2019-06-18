@@ -13,6 +13,9 @@ import envelopeImage from './dashboard/envelope.png';
 import faviconImage from './dashboard/favicon.ico';
 import featuresImage from './dashboard/features.png';
 import footerImage from './dashboard/footer.png';
+import headerImage from './dashboard/header.png';
+import headerMobileImage from './dashboard/headermobile.png';
+import circleShadeBGImage from './dashboard/circleshadebg.png';
 import googleplayImage from './dashboard/googleplay.png';
 import grabImage from './dashboard/grab.png';
 import greenpetalImage from './dashboard/greenpetal.png';
@@ -92,6 +95,9 @@ export {
   faviconImage,
   featuresImage,
   footerImage,
+  headerImage,
+  headerMobileImage,
+  circleShadeBGImage,
   googleplayImage,
   grabImage,
   greenpetalImage,

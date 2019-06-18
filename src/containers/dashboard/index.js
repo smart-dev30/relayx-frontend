@@ -15,7 +15,6 @@ import TopUpCompletion from '../TopUps/Completion'
 
 import {
   anyPay1Image,
-  anypay2Image,
   apkImage,
   appstoreImage,
   case1Image,
@@ -37,6 +36,8 @@ import {
   scbImage,
   showcaseImage,
   twitterImage,
+  headerImage,
+  circleShadeBGImage
 } from '../../images'
 
 import { styles } from './style';
@@ -80,6 +81,7 @@ class Dashboard extends Component {
     return (
       <div className={classes.container}>
         <Grid container className={classNames(classes.header, classes.centerContent)} spacing={2}>
+          <img className={classes.backgroundImage0} src={headerImage} alt="Background" />
           <Grid item sm={12} xs={12} className={classes.logos}>
             <img src={logoBigImage} className={classes.logo} alt="logo" />
           </Grid>
@@ -109,6 +111,7 @@ class Dashboard extends Component {
           </Grid>
           <Grid item md={6} sm={12}>
             <div className={classes.topUpContainer}>
+              <img className={classes.backgroundImageTopContainer} src={circleShadeBGImage} alt="Background" />
               {step === Step.SET_HANDLE && (
                 <SetHandle onNext={this.handleNextPress} onBack={this.handleBackPress} />
               )}
@@ -199,6 +202,9 @@ class Dashboard extends Component {
           </Grid>
 
           <Grid container className={classes.centerContent} spacing={2}>
+            <Grid item md={6} sm={12}>
+              <img className={classes.phone} src={anyPay1Image} alt="Payment method" />
+            </Grid>
             <Typography className={classes.title}>
               Relay One - Accept any payment
             </Typography>
@@ -209,23 +215,6 @@ class Dashboard extends Component {
               <Typography className={classes.description}>
                 Whether crypto, Alipay, WeChat, or anything else, it’s the most interoperable and fastest solution.
               </Typography>
-            </Grid>
-            <Grid item md={6} sm={12}>
-              <img className={classes.phone} src={anyPay1Image} alt="Payment method" />
-            </Grid>
-          </Grid>
-
-          <Grid container className={classes.centerContent} spacing={2}>
-            <Grid item md={6} sm={12}>
-              <Typography className={classes.subTitle}>
-                Stay in control
-              </Typography>
-              <Typography className={classes.description}>
-                We don’t hold your funds. All funds go to your 1handle in your RelayX app where you have ownership.
-              </Typography>
-            </Grid>
-            <Grid item md={6} sm={12}>
-              <img className={classes.phone} src={anypay2Image} alt="Hide wallet" />
             </Grid>
           </Grid>
 
@@ -271,17 +260,19 @@ class Dashboard extends Component {
                 Start using money the way it was meant to be. Relay in seconds.
               </Typography>
             </Grid>
-            <Grid item sm={4} xs={12} className={classNames(classes.center)}>
+          </Grid>
+          <Grid container className={classes.centerContent} spacing={3}>
+            <Grid item sm={3} xs={12}  className={classNames(classes.center, classes.social)}>
               <a href="https://play.google.com/store/apps/details?id=com.RelayX">
                 <img className={classes.downloadLink} src={googleplayImage} alt="Google play" />
               </a>
             </Grid>
-            <Grid item sm={4} xs={12} className={classNames(classes.center)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.center, classes.social)}>
               <a href="https://testflight.apple.com/join/XJCahkvx">
                 <img className={classes.downloadLink} src={appstoreImage} alt="Appstore" />
               </a>
             </Grid>
-            <Grid item sm={4} xs={12} className={classNames(classes.center)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.center, classes.social)}>
               <a href="https://www.installonair.com/app-download-link/UlhWAn">
                 <img className={classes.downloadLink} src={apkImage} alt="Raw Apk" />
               </a>
