@@ -167,33 +167,50 @@ class SelectPayment extends Component {
         </div>
 
         <Grid container className={classes.formFooter}>
-          <Grid item xs={6}>
-            <Button
-              variant="contained"
-              color="secondary"
-              className={classes.actionButton}
-              onClick={onBack}
-            >
-              Back
-          </Button>
-          </Grid>
+          {!isLoading && orders.length === 0 && (
+            <Grid item xs={6}>
+              <Button
+                color="primary"
+                className={classes.actionButton}
+                onClick={onBack}
+              >
+                Back
+              </Button>
 
-          <Grid item xs={6}>
-            <Button
-              variant="contained"
-              color="primary"
-              classes={{
-                label: classes.nextButton
-              }}
-              className={
-                classNames(classes.actionButton, classes.nextButton)
-              }
-              disabled={!selectedTopUp}
-              onClick={this.handleNextPress}
-            >
-              Next
-            </Button>
-          </Grid>
+            </Grid>
+          )}
+
+          {orders.length > 0 && (
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                color="secondary"
+                className={classes.actionButton}
+                onClick={onBack}
+              >
+                Back
+              </Button>
+            </Grid>
+          )}
+
+          {orders.length > 0 && (
+            <Grid item xs={6}>
+              <Button
+                variant="contained"
+                color="primary"
+                classes={{
+                  label: classes.nextButton
+                }}
+                className={
+                  classNames(classes.actionButton, classes.nextButton)
+                }
+                disabled={!selectedTopUp}
+                onClick={this.handleNextPress}
+              >
+                Next
+              </Button>
+            </Grid>
+          )}
         </Grid>
         <Loader visible={isLoading} />
       </div>
