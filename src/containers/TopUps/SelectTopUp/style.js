@@ -57,4 +57,17 @@ export const styles = createStyles(theme => ({
   activeOrderText: {
     color: 'white',
   },
+
+  noOrders: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  failedImage: {
+    width: 36,
+    height: 36,
+    marginBottom: 10,
+  }
 }));

@@ -262,7 +262,7 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
           <Grid container className={classes.centerContent} spacing={3}>
-            <Grid item sm={3} xs={12}  className={classNames(classes.center, classes.social)}>
+            <Grid item sm={3} xs={12} className={classNames(classes.center, classes.social)}>
               <a href="https://play.google.com/store/apps/details?id=com.RelayX">
                 <img className={classes.downloadLink} src={googleplayImage} alt="Google play" />
               </a>

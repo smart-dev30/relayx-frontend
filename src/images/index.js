@@ -36,6 +36,8 @@ import showcaseImage from './dashboard/showcase.png';
 import sponsorImage from './dashboard/sponsor.png';
 import twitterImage from './dashboard/twitter.png';
 
+import failedImage from './failed.png';
+
 import payImage2 from './paymodes/2.png';
 import payImage3 from './paymodes/3.png';
 import payImage4 from './paymodes/4.png';
@@ -98,6 +100,7 @@ export {
   headerImage,
   headerMobileImage,
   circleShadeBGImage,
+  failedImage,
   googleplayImage,
   grabImage,
   greenpetalImage,
