@@ -22,7 +22,7 @@ export const styles = {
     alignItems: 'center',
   },
 
-  formContent: { flex: 1, padding: '30px 40px', textAlign: 'left' },
+  formContent: { flex: 1, padding: '30px 40px', textAlign: 'left', display: 'flex', flexDirection: 'column' },
   formFooter: { paddingBottom: 35, flexDirection: 'row', justifyContent: 'center' },
 
   actionButton: {

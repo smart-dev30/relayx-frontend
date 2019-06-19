@@ -25,19 +25,20 @@ import { orderActionCreators, rechargeActionCreators } from '../../../actions';
 
 import { styles } from './style';
 
-import { payImages } from '../../../images';
+import { payImages, failedImage } from '../../../images';
 
 class SelectPayment extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedTopUp: null,
-      isLoading: false,
+      isLoading: true,
     }
   }
 
   async componentDidMount() {
     await this.getTopUpOrders()
+    this.setState({ isLoading: false });
   }
 
   getTopUpOrders = async () => {
@@ -110,8 +111,25 @@ class SelectPayment extends Component {
     </div>
   }
 
+  renderFailed = () => {
+    const { classes } = this.props;
+    return (
+      <div className={classes.noOrders}>
+        <img src={failedImage} alt="Failed" className={classes.failedImage} />
+
+        <Typography variant="h6">
+          No orders at the moment...
+        </Typography>
+
+        <Typography variant="body1">
+          Maybe come back later?
+        </Typography>
+      </div>
+    )
+  }
+
   render() {
-    const { classes, paymentOption, onBack } = this.props;
+    const { classes, orders, paymentOption, onBack } = this.props;
     const { selectedTopUp, isLoading } = this.state;
     const paymentId = get(paymentOption, 'paymentId', 2) - 2;
 
@@ -137,9 +155,15 @@ class SelectPayment extends Component {
             </Button>
           </ListItem>
 
-          <Typography variant="body2" className={classes.title}>Choose your Top Up amount</Typography>
+          {orders.length > 0 && (
+            <Typography variant="body2" className={classes.title}>
+              Choose your Top Up amount
+            </Typography>
+          )}
 
-          {this.renderOrders()}
+          {orders.length > 0 && this.renderOrders()}
+
+          {!isLoading && orders.length === 0 && this.renderFailed()}
         </div>
 
         <Grid container className={classes.formFooter}>
