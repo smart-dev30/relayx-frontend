@@ -273,7 +273,7 @@ class Dashboard extends Component {
               </a>
             </Grid>
             <Grid item sm={3} xs={12} className={classNames(classes.center, classes.social)}>
-              <a href="https://www.installonair.com/app-download-link/SW6VBj">
+              <a href="https://www.installonair.com/app-download-link/oIHEmA">
                 <img className={classes.downloadLink} src={apkImage} alt="Raw Apk" />
               </a>
             </Grid>
